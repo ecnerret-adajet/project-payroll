@@ -18,11 +18,11 @@ class CreatePositionsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('job_position', function (Blueprint $table){
-            $table->integer('job_id')->unsigned();
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
+        Schema::create('employee_position', function (Blueprint $table){
+            $table->integer('employee_id')->unsigned()->index();
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 
-            $table->integer('position_id')->unsigned();
+            $table->integer('position_id')->unsigned()->index();
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
 
             $table->timestamps();
@@ -37,7 +37,7 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('job_position');
+        Schema::drop('employee_position');
         Schema::drop('positions');
     }
 }

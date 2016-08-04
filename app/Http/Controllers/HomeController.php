@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\User;
+use App\Employee;
+use App\Status;
+use App\Position;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -24,6 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+            $employees = Employee::latest()->get();
+            $statuses = Status::all();
+            $positions = Position::all();
+
+        return view('home', compact('employees',
+                'statuses',
+                'positions'));
     }
 }

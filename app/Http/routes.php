@@ -12,10 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-Route::resource('members','MembersController');
+Route::resource('employees','EmployeesController');

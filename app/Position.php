@@ -10,8 +10,8 @@ class Position extends Model
     	'name'
     ];
 
-    public function jobs()
+    public function employees()
    	{
-   		return $this->belongsToMany('App\Job');
+   		return $this->belongsToMany('App\Employee');
    	}
 }

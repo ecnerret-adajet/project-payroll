@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
@@ -63,6 +63,23 @@
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('roles') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">User Role</label>
+                            <div class="col-md-6">
+                             {{ Form::select('roles', array(
+                                'Employee' => 'Employee', 
+                                'Administrator' => 'Administrator'), 
+                                null, array('placeholder' => ' -------- Select Role -------', 'class'=>'form-control' )) }}
+                                
+                               @if ($errors->has('roles'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('roles') }}</strong>
+                                    </span>
+                                @endif 
+                                
                             </div>
                         </div>
 
