@@ -19,8 +19,9 @@ class Employee extends Model
     	'telephone',
     	'address',
         'date_hired',
-        'pagibig-_no',
+        'pagibig_no',
         'sss_no',
+        'avatar',
         'salary_type'
     ];
 

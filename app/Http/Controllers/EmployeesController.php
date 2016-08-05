@@ -9,10 +9,11 @@ use Illuminate\Support\Collection;
 use App\Http\Requests;
 use App\User;
 use App\Employee;
-use App\Image;
+use Image;
 use App\Status;
 use App\Position;
 use Carbon\Carbon;
+
 
 class EmployeesController extends Controller
 {
@@ -38,9 +39,10 @@ class EmployeesController extends Controller
      */
     public function create()
     {
+        $employees = Employee::all();
         $statuses = Status::lists('name','id');
         $positions = Position::lists('name','id');
-        return view('employees.create', compact('statuses','positions'));
+        return view('employees.create', compact('statuses','positions','employees'));
     }
 
     /**
@@ -52,8 +54,19 @@ class EmployeesController extends Controller
     public function store(EmployeeRequest $request)
     {
         $employee = Auth::user()->employees()->create($request->all());
-        $employee->statuses()->attach($request->all('status_list'));
-        $employee->positions()->attach($request->all('position_list'));
+
+        $employee->statuses()->attach($request->input('status_list'));
+        $employee->positions()->attach($request->input('position_list'));
+
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' .$avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300,300)->save( public_path('/avatar/' . $filename ) ); 
+            $employee->avatar = $filename;
+            $employee->save();
+        }
+
+
         return redirect('employees');
     }
 

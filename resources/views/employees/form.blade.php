@@ -8,7 +8,22 @@
   <div class="tab-pane fade active in" id="personal">
     <p style="padding-bottom: 10px;">
 
-      <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+
+
+                           <center>
+                        <img class="img-responsive img-circle" style="width: 150px; height:150px; margin-bottom: 20px;"  src="{{asset('/avatar/avatar.png')}}">
+                      </center>
+
+
+                      <div class="form-group">
+                            <div class=" col-md-7 col-md-offset-3">                                
+                            <input name="avatar" type="file" class="filestyle" data-size="sm" data-buttonName="btn-primary" data-buttonBefore="true">
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label"> 
                         {!! Form::label('first_name', 'First Name:')  !!}
                         </label>
