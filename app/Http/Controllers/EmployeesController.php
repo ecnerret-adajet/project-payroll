@@ -8,7 +8,6 @@ use App\Http\Requests\EmployeeRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use App\Http\Requests;
-
 use App\User;
 use App\Employee;
 use Image;
@@ -114,7 +113,20 @@ class EmployeesController extends Controller
      */
     public function update(EmployeeRequest $request, Employee $employee)
     {
-        $employees->updates($request->all());
+        $employee->update($request->all());
+        $employee->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
+        $employee->positions()->sync((!$request->input('position_list') ? [] : $request->input('position_list')));
+
+
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' .$avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300,300)->save( public_path('/avatar/' . $filename ) ); 
+            $employee->avatar = $filename;
+            $employee->save();
+        }
+
+
         return redirect('employees');
     }
 

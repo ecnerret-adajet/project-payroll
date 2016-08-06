@@ -9,6 +9,7 @@ use App\Employee;
 use App\Status;
 use App\Position;
 use Carbon\Carbon;
+use App\Announcement;
 
 class HomeController extends Controller
 {
@@ -31,7 +32,7 @@ class HomeController extends Controller
     {
             $employees = Employee::latest()->get();
             $statuses = Status::all();
-
+            $announcements = Announcement::orderBy('created_at','desc')->take(1)->get();
             $status = Status::with('employees')->get();
             $positions = Position::all();
             $users = User::all();
@@ -40,6 +41,7 @@ class HomeController extends Controller
                 'statuses',
                 'users',
                 'status',
+                'announcements',
                 'positions'));
     }
 }

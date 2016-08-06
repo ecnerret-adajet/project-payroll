@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
+     <!-- Bootstrap core CSS -->
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+
      <!-- Ionicons 2.0.0 -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
@@ -40,8 +43,7 @@
 
     <title>MQRK Payroll</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+   
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
@@ -102,8 +104,9 @@
             </li>
 
 
-            <li class="active"><a href="#"><i class="fa fa-tachometer" style="padding-right: 5px;" aria-hidden="true"></i> Dashboard <span class="sr-only">(current)</span></a></li>
-            <li><a href="#"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Employees</a></li>
+            <li><a href="{{url('/home')}}"><i class="fa fa-tachometer" style="padding-right: 5px;" aria-hidden="true"></i> Dashboard</a></li>
+            <li><a href="{{url('/announcements')}}"><i class="fa fa-bullhorn" style="padding-right: 5px;" aria-hidden="true"></i> Announcements</a></li>
+            <li><a href="{{url('/employees')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Employees</a></li>
             <li><a href="#"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
             <li><a href="#"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslip</a></li>
           </ul>
@@ -126,6 +129,10 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+
+     <!-- bootstsrap modal -->
+    <script src="{{ asset('/js/laravel-bootstrap-modal-form.js') }}"></script>
          <!-- datatables   -->  
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.responsive.min.js') }}"></script>
@@ -139,14 +146,57 @@
     <script src="{{ asset('js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+
+
+
+    <script>    
+    $(document).ready(function() {
+    $('#table-data').DataTable();
+      });
+    </script>
+
+     <script src="{{asset('/js/bootstrap-filestyle.min.js')}}" type="text/javascript"></script>
+       <script>
+       $(":file").filestyle({size: "sm", buttonName: "btn-primary", buttonBefore: true});
+     </script>
   
   
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="http://v4-alpha.getbootstrap.com/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+     <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+    <script>
+    var url = window.location;
+// Will only work if string in href matches with location
+$('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+
+// Will also work for relative and absolute hrefs
+$('ul.nav a').filter(function() {
+    return this.href == url;
+}).parent().addClass('active');
+    </script>
+
+    <script type="text/javascript">
+         $('.btnNext').click(function(){
+  $('.nav-tabs > .active').next('li').find('a').trigger('click');
+});
+
+  $('.btnPrevious').click(function(){
+  $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+});
+    </script>
   </body>
 </html>

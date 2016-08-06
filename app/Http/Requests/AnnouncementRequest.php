@@ -13,7 +13,7 @@ class AnnouncementRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class AnnouncementRequest extends Request
     public function rules()
     {
         return [
-            //
+            'title' => 'required|min:3',
+            'body' => 'required|min:3'
         ];
     }
 }

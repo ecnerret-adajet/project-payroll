@@ -8,8 +8,7 @@ use App\Http\Requests\AnnouncementRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use App\Http\Requests;
-
-use App\Announcements;
+use App\Announcement;
 use App\User;
 use Carbon\Carbon;
 
@@ -42,9 +41,11 @@ class AnnouncementsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Announcement $request)
+    public function store(AnnouncementRequest $request)
     {
         $announcement = Auth::user()->announcements()->create($request->all()); 
+
+
         return redirect('announcements');
     }
 
