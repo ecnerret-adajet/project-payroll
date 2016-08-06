@@ -2,8 +2,10 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+
 
 class Employee extends Model
 {
@@ -32,6 +34,29 @@ class Employee extends Model
 
     /* list user table */
 
+    public function setBirthdateAttribute($date)
+    {
+          $this->attributes['birthdate'] = Carbon::parse($date);
+    }
+
+    public function getBirthdateAttribute($date)
+    {
+         return new Carbon($date);
+    }
+
+
+    public function setDateHiredAttribute($date)
+    {
+         $this->attributes['date_hired'] = Carbon::parse($date);
+    }
+
+    public function getDateHiredAttribute($date)
+    {
+            return new Carbon($date);
+    }
+
+
+
     public function user()
     {
     	return $this->belongsTo('App\User');
@@ -59,14 +84,9 @@ class Employee extends Model
     }
 
 
-    public function setBirthdateAttribute($date)
-    {
-        $this->attributes['birthdate'] = Carbon::createFromFormat('Y-m-d', $date);
-    }
 
-    public function setDateHiredAttribute($date)
-    {
-        $this->attributes['date_hired'] = Carbon::createFromFormat('Y-m-d', $date);
-    }
+  
+
+
 
 }

@@ -95,17 +95,7 @@
                 </center>
 
 
-                 <ul class="nav nav-tabs">
-  <li class="active"><a href="#personal" data-toggle="tab" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i> Personal Information</a></li>
-  <li class=""><a href="#contacts" data-toggle="tab" aria-expanded="false"><i class="fa fa-phone" aria-hidden="true"></i> Contacts Information</a></li>
-   <li class=""><a href="#job" data-toggle="tab" aria-expanded="false"><i class="fa fa-suitcase" aria-hidden="true"></i> Job Information</a></li> 
-</ul>
-
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade active in" id="personal">
-    <p style="padding-bottom: 10px;">
-
-
+     <h3>Personal Information</h3>
     <table class="table table-striped table-hover ">
   <tbody>
     <tr>
@@ -114,7 +104,7 @@
     </tr>
         <tr>
       <td>Birthdate:</td>
-      <td> {{  date("d/m/Y", strtotime($employee->brithdate))  }}</td>
+      <td> {{  date('m/d/Y', strtotime($employee->birthdate))  }}</td>
     </tr>
 
     <tr>
@@ -133,11 +123,7 @@
      </tbody>
 </table>  
 
-    </p>
-  </div>
-
-  <div class="tab-pane fade" id="contacts">
-    <p style="padding-bottom: 10px;">
+<h3>Contacts Information</h3>
 
 
         <table class="table table-striped table-hover ">
@@ -166,11 +152,8 @@
 </table>  
 
 
-    </p>
-  </div>
+   <h3>Job Information</h3>
 
-    <div class="tab-pane fade" id="job">
-    <p style="padding-bottom: 10px">
 
 
           <table class="table table-striped table-hover ">
@@ -199,8 +182,7 @@
           <tr>
       <td>Date hired:</td>
       <td>
-     {{$employee->date_hired}} 
-
+      {{  date('m/d/Y', strtotime($employee->date_hired))  }}
       </td>
     </tr>
 
@@ -234,9 +216,8 @@
      </tbody>
 </table>  
    
-    </p>
-  </div>
-</div>    
+    
+     
 
 
 
