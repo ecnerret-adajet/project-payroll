@@ -31,10 +31,15 @@ class HomeController extends Controller
     {
             $employees = Employee::latest()->get();
             $statuses = Status::all();
+
+            $status = Status::with('employees')->get();
             $positions = Position::all();
+            $users = User::all();
 
         return view('home', compact('employees',
                 'statuses',
+                'users',
+                'status',
                 'positions'));
     }
 }

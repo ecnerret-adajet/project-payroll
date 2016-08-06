@@ -10,9 +10,7 @@
 
 
 
-                           <center>
-                        <img class="img-responsive img-circle" style="width: 150px; height:150px; margin-bottom: 20px;"  src="{{asset('/avatar/avatar.png')}}">
-                      </center>
+               
 
 
                       <div class="form-group">
@@ -72,7 +70,7 @@
 
                              <div class="form-group">
                          <label class="col-md-4 control-label"> 
-                         {!! Form::label('birthdate', 'Date:')  !!}
+                         {!! Form::label('birthdate', 'Birthdate:')  !!}
                         </label>
                         <div class="col-md-6">
                             {!! Form::input('date', 'birthdate', $employee->birthdate, ['class' => 'form-control']) !!}         

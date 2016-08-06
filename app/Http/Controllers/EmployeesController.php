@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use App\Http\Requests;
+
 use App\User;
 use App\Employee;
 use Image;
@@ -29,7 +31,13 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        return view('employees.index');
+        $employees = Employee::all();
+        $statuses = Status::lists('name','id');
+        $positions = Position::lists('name','id');
+        return view('employees.index', compact(
+            'employees',
+            'statuses',
+            'positons'));
     }
 
     /**
@@ -89,7 +97,12 @@ class EmployeesController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('employees.edit', compact('employee'));
+        $statuses = Status::lists('name','id');
+        $positions = Position::lists('name','id');
+        return view('employees.edit', compact(
+            'positions',
+            'statuses',
+            'employee'));
     }
 
     /**

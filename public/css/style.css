@@ -1,3 +1,7 @@
 .sidebar ul li{
 	font-size: 15px;
 }
+
+*:not(.img-circle){
+	border-radius: 0 ! important;
+}

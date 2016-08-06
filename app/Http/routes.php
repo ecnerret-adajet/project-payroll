@@ -19,3 +19,4 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 Route::resource('employees','EmployeesController');
+Route::resource('announcements','AnnouncementsController');
