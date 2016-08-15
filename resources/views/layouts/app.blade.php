@@ -103,12 +103,31 @@
 
             </li>
 
-
+           
             <li><a href="{{url('/home')}}"><i class="fa fa-tachometer" style="padding-right: 5px;" aria-hidden="true"></i> Dashboard</a></li>
+
+           @if(Auth::user()->hasRole('Administrator'))
+           @else
+            <li><a href="{{url('/employees/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Employee Info</a></li>
+           @endif
+
+
+            @permission('role-create')
             <li><a href="{{url('/announcements')}}"><i class="fa fa-bullhorn" style="padding-right: 5px;" aria-hidden="true"></i> Announcements</a></li>
+            @endpermission
+
+            @permission('role-create')
             <li><a href="{{url('/employees')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Employees</a></li>
+            @endpermission
+
             <li><a href="#"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
+
             <li><a href="#"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslip</a></li>
+
+            @permission('role-create')
+            <li><a href="{{url('/users')}}"><i class="fa fa-users" style="padding-right: 5px;" aria-hidden="true"></i> Users</a></li>
+            @endpermission
+            
           </ul>
        
         </div>

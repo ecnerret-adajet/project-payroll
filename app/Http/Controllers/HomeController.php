@@ -8,6 +8,7 @@ use App\User;
 use App\Employee;
 use App\Status;
 use App\Position;
+use Auth;
 use Carbon\Carbon;
 use App\Announcement;
 
@@ -44,4 +45,6 @@ class HomeController extends Controller
                 'announcements',
                 'positions'));
     }
+
+
 }

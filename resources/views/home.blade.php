@@ -5,7 +5,7 @@
 
         <h1 class="page-header">Dashboard</h1>
 
-
+        @permission('role-create')
           <div class="row" >
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
@@ -52,7 +52,7 @@
               </div><!-- /.info-box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
-
+          @endpermission
         
           <h3 class="sub-header">Latest Announcement</h3>
           <div class="row">
@@ -68,18 +68,18 @@
           </div>
 
 
-
+          @permission('role-create')
           <h3 class="sub-header">Daily Time Records</h3>
 
             <table id="table-data" class=" dt-responsive nowrap display table-responsive table-hover table table-responsive">
               <thead>
                 <tr class="info">
                   <th></th>
-                  <th>Full Name</th>
+                     <th>Full Name</th>
                   <th>Position</th>
                   <th>Status</th>
-                  <th>Age</th>
-                  <th>Date hired</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
                 </tr>
               </thead>
               <tfoot>
@@ -88,8 +88,8 @@
                   <th>Full Name</th>
                   <th>Position</th>
                   <th>Status</th>
-                  <th>Age</th>
-                  <th>Date hired</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -112,16 +112,16 @@
                   @endforeach
                   </td>
                   <td>
-                    {{$employee->age}}
+                    0000-00-00
                   </td>
                   <td>
-                 {{ (date("d/m/Y", strtotime($employee->date_hired)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($employee->date_hired)) )  }}
+               0000-00-00
                   </td>
                 </tr>
               @endforeach
               </tbody>
             </table>
-
+            @endpermission
 
 
 

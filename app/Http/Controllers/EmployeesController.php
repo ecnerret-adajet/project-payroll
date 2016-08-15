@@ -14,6 +14,9 @@ use Image;
 use App\Status;
 use App\Position;
 use Carbon\Carbon;
+use App\Role;
+use DB;
+use Hash;
 
 
 class EmployeesController extends Controller
@@ -31,6 +34,7 @@ class EmployeesController extends Controller
     public function index()
     {
         $employees = Employee::all();
+        $user = User::all();
         $statuses = Status::lists('name','id');
         $positions = Position::lists('name','id');
         return view('employees.index', compact(
@@ -49,7 +53,8 @@ class EmployeesController extends Controller
         $employees = Employee::all();
         $statuses = Status::lists('name','id');
         $positions = Position::lists('name','id');
-        return view('employees.create', compact('statuses','positions','employees'));
+         $roles = Role::lists('display_name','id');
+        return view('employees.create', compact('statuses','positions','employees','roles'));
     }
 
     /**
@@ -60,8 +65,25 @@ class EmployeesController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        $employee = Auth::user()->employees()->create($request->all());
 
+         $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'roles' => 'required'
+        ]);
+
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+
+        foreach ($request->input('roles') as $key => $value) {
+            $user->attachRole($value);
+        }
+
+        $employee = $user->employees()->create($request->all());
+       
         $employee->statuses()->attach($request->input('status_list'));
         $employee->positions()->attach($request->input('position_list'));
 

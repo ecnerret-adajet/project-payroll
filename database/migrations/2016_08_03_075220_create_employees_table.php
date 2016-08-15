@@ -33,6 +33,7 @@ class CreateEmployeesTable extends Migration
             $table->string('mobile_no');
             $table->string('telephone');
             $table->string('address');
+            $table->string('permanent_address');
 
 
 

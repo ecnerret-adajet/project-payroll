@@ -3,16 +3,18 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
+     use EntrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','roles',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -26,7 +28,7 @@ class User extends Authenticatable
 
     public function employees()
     {
-        return $this->hasMany('App\Employee');
+        return $this->hasOne('App\Employee');
     }
 
     public function announcements()

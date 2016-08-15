@@ -13,8 +13,8 @@
                   <th>Full Name</th>
                   <th>Position</th>
                   <th>Status</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
+                    <th>Age</th>
+                  <th>Date Hired</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -24,8 +24,8 @@
                   <th>Full Name</th>
                    <th>Position</th>
                   <th>Status</th>
-                  <th>Time In</th>
-                  <th>Time Out</th>
+                  <th>Age</th>
+                  <th>Date Hired</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -49,10 +49,10 @@
                   @endforeach
                   </td>
                   <td>
-                    00-00-00
+                   {{$employee->age}}
                   </td>
                   <td>
-                    00-00-00
+                      {{ (date("d/m/Y", strtotime($employee->date_hired)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($employee->date_hired)) )  }}
                   </td>
                   <td>
                   <a class="bootstrap-modal-form-open" data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="" style="padding-right: 10px;">
@@ -86,6 +86,8 @@
         <h4 class="modal-title">View details</h4>
       </div>
       <div class="modal-body">
+
+
               <div class="row">
         <div class="col-md-12">
             <div class="panel-body">
@@ -247,8 +249,10 @@
                     
             </div>
         </div>
-    </div>
-      </div>
+    </div><!-- end row -->
+
+
+      </div><!-- end modal body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           

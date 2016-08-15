@@ -1,11 +1,106 @@
  <ul class="nav nav-tabs">
-  <li class="active"><a href="#personal" data-toggle="tab" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i> Personal Information</a></li>
+   <li class="active"><a href="#account" data-toggle="tab" aria-expanded="true"><i class="fa fa-key" aria-hidden="true"></i> Account Information</a></li>
+  <li><a href="#personal" data-toggle="tab" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i> Personal Information</a></li>
   <li class=""><a href="#contacts" data-toggle="tab" aria-expanded="false"><i class="fa fa-phone" aria-hidden="true"></i> Contacts Information</a></li>
    <li class=""><a href="#job" data-toggle="tab" aria-expanded="false"><i class="fa fa-suitcase" aria-hidden="true"></i> Job Information</a></li> 
 </ul>
 
 <div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade active in" id="personal">
+
+<div class="tab-pane fade active in" id="account">
+    <p style="padding-bottom: 10px;">
+
+                         <div class="form-group">
+                            <div class=" col-md-7 col-md-offset-3">                                
+                            <input name="avatar" type="file" class="filestyle" data-size="sm" data-buttonName="btn-primary" data-buttonBefore="true">
+                            </div>
+                        </div>
+
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('name', 'Name:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::text('name', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('name'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+                  <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('email', 'Email:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::text('email', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('email'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('password', 'Password:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::password('password', ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('password'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+                    <div class="form-group{{ $errors->has('confirm-password') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('confirm-password', 'Confirm password:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::password('confirm-password', ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('confirm-password'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('confirm-password') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+                          <div class="form-group">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('roles', 'Roles:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::select('roles[]', $roles, null,  ['class' => 'form-control','placeholder' => '--- Select a Role ---']) !!}     
+                     
+                        </div>
+                        </div>
+
+
+                           <div class="row">
+                    <div class="col-md-12">
+                    <a class="pull-right btnNext btn btn-primary btn-sm" >Next</a>
+                    </div>
+                   </div>  
+
+
+
+    </p>
+</div>
+
+
+
+  <div class="tab-pane fade active" id="personal">
     <p style="padding-bottom: 10px;">
 
 
@@ -13,12 +108,7 @@
                
 
 
-                      <div class="form-group">
-                            <div class=" col-md-7 col-md-offset-3">                                
-                            <input name="avatar" type="file" class="filestyle" data-size="sm" data-buttonName="btn-primary" data-buttonBefore="true">
-                            </div>
-                        </div>
-
+                 
 
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
@@ -306,7 +396,7 @@
 
      <div class="row">
                     <div class="col-md-6">
-                      {!! Form::reset('Cancel', ['class' => 'btn btn-default pull-left']) !!}
+                         <a class="pull-left btnPrevious btn btn-default btn-sm" >Previous</a>
                     </div>
 
                     <div class="col-md-6">

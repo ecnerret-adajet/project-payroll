@@ -17,6 +17,15 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::group(['middleware' => ['auth']], function() {
+
 Route::get('/home', 'HomeController@index');
 Route::resource('employees','EmployeesController');
 Route::resource('announcements','AnnouncementsController');
+Route::resource('users','UserController');
+Route::resource('roles','RoleController');
+
+
+
+
+});
