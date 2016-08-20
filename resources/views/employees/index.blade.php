@@ -2,30 +2,34 @@
 
 @section('content')
 
- <h1 class="page-header">All Employee
+ <h1 class="page-header">All Employee 
 <a href="{{url('/employees/create')}}" class="btn pull-right btn-primary btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Employee</a>
  </h1>
 
-  <table id="table-data" class=" dt-responsive nowrap display table-responsive table-hover table table-responsive">
+  <table id="emp-data" class="dt-responsive table-bordered nowrap display table-responsive table-hover table table-responsive">
               <thead>
                 <tr class="info">
                   <th></th>
+                  <th>Employee Id</th>
                   <th>Full Name</th>
                   <th>Position</th>
                   <th>Status</th>
                     <th>Age</th>
                   <th>Date Hired</th>
+                  <th>Salary</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr class="info">
                   <th></th>
+                  <th>Employee Id</th>
                   <th>Full Name</th>
                    <th>Position</th>
                   <th>Status</th>
                   <th>Age</th>
                   <th>Date Hired</th>
+                   <th>Salary</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -34,6 +38,9 @@
                 <tr>
                   <td>
                   <img class="img-responsive img-circle" style="width: 35px; height: auto;" src="{{asset('/avatar/'.$employee->avatar)}}">
+                  </td>
+                  <td>
+                  {{$employee->id}}
                   </td>
                   <td>
                   {{$employee->first_name}} {{$employee->middle_name}} {{$employee->last_name}}    
@@ -55,16 +62,12 @@
                       {{ (date("d/m/Y", strtotime($employee->date_hired)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($employee->date_hired)) )  }}
                   </td>
                   <td>
+                    {{ $employee->payrolls->basic_pay}}
+                  </td>
+                  <td>
                   <a class="bootstrap-modal-form-open" data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="" style="padding-right: 10px;">
                   <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
                   </a>
-
-                  <a href="{{url('/employees/'.$employee->id.'/edit')}}">
-                  <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
-                  </a>
-
-
-
                   </td>
                 </tr>
               @endforeach

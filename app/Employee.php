@@ -85,6 +85,24 @@ class Employee extends Model
 
 
 
+    /* list attendance to employees table */
+
+    public function attendance()
+    {
+        return $this->hasOne('App\Attendance');
+    }
+
+    /* list payroll's employee */
+
+    public function payrolls()
+    {
+        return $this->hasOne('App\Payroll','employee_id','id');
+    }
+
+
+
+
+
   
 
 

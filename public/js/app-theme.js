@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 $(function () {
 
       
@@ -18,20 +11,27 @@ $(function () {
  //end function js   
 });
 
+(function () {
+    function checkTime(i) {
+        return (i < 10) ? "0" + i : i;
+    }
+
+    function startTime() {
+        var today = new Date(),
+            h = checkTime(today.getHours()),
+            m = checkTime(today.getMinutes()),
+            s = checkTime(today.getSeconds());
+            ampm = checkTime() >= 12 ? 'pm' : 'am',
+        document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+        t = setTimeout(function () {
+            startTime()
+        }, 500);
+    }
+    startTime();
 
 
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('txt').innerHTML =
-    h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
+
+})();
+
+
+

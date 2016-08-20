@@ -34,23 +34,23 @@ class PermissionTableSeeder extends Seeder
                 'description' => 'Delete Role'
             ],
             [
-                'name' => 'item-list',
-                'display_name' => 'Display Item Listing',
+                'name' => 'Read',
+                'display_name' => 'Read',
                 'description' => 'See only Listing Of Item'
             ],
             [
-                'name' => 'item-create',
-                'display_name' => 'Create Item',
+                'name' => 'Create',
+                'display_name' => 'Create',
                 'description' => 'Create New Item'
             ],
             [
-                'name' => 'item-edit',
-                'display_name' => 'Edit Item',
+                'name' => 'Edit',
+                'display_name' => 'Edit',
                 'description' => 'Edit Item'
             ],
             [
-                'name' => 'item-delete',
-                'display_name' => 'Delete Item',
+                'name' => 'Delete',
+                'display_name' => 'Delete',
                 'description' => 'Delete Item'
             ]
         ];

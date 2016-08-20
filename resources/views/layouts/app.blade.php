@@ -75,11 +75,10 @@
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" style="position: relative; padding-left: 50px;">
                   <img src="{{asset('/avatar/placeholder.png')}}" class="img-circle img-responsive " style="width: 35px; height:auto; position: absolute; top: 10px; left: 10px;" alt="User Image" />
-                  <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                  <span>{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu" style="width:200px; border-left: 1px solid #95a5a6; border-bottom: 1px solid #95a5a6; border-radius:0;">
                   <!-- User image -->
-                     <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Account Settings</a></li>
                     <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
           </ul>
     
@@ -108,7 +107,8 @@
 
            @if(Auth::user()->hasRole('Administrator'))
            @else
-            <li><a href="{{url('/employees/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Employee Info</a></li>
+            <li><a href="{{url('/employees/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i>My Information</a></li>
+              <li><a href="{{url('/payrolls/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslip</a></li>
            @endif
 
 
@@ -120,11 +120,12 @@
             <li><a href="{{url('/employees')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Employees</a></li>
             @endpermission
 
-            <li><a href="#"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
+         
 
-            <li><a href="#"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslip</a></li>
 
             @permission('role-create')
+               <li><a href="#"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
+            <li><a href="{{url('/payrolls')}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslips</a></li>
             <li><a href="{{url('/users')}}"><i class="fa fa-users" style="padding-right: 5px;" aria-hidden="true"></i> Users</a></li>
             @endpermission
             
@@ -171,6 +172,12 @@
     <script>    
     $(document).ready(function() {
     $('#table-data').DataTable();
+      });
+    </script>
+
+     <script>    
+    $(document).ready(function() {
+    $('#emp-data').DataTable();
       });
     </script>
 

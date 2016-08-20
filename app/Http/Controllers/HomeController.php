@@ -8,6 +8,7 @@ use App\User;
 use App\Employee;
 use App\Status;
 use App\Position;
+use App\Role;
 use Auth;
 use Carbon\Carbon;
 use App\Announcement;
@@ -37,10 +38,12 @@ class HomeController extends Controller
             $status = Status::with('employees')->get();
             $positions = Position::all();
             $users = User::all();
+            $roles = Role::all();
 
         return view('home', compact('employees',
                 'statuses',
                 'users',
+                'roles',
                 'status',
                 'announcements',
                 'positions'));

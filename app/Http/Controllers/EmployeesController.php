@@ -15,6 +15,7 @@ use App\Status;
 use App\Position;
 use Carbon\Carbon;
 use App\Role;
+use App\Payroll;
 use DB;
 use Hash;
 
@@ -35,11 +36,14 @@ class EmployeesController extends Controller
     {
         $employees = Employee::all();
         $user = User::all();
+        $payrolls = Payroll::with('employees')->get();
         $statuses = Status::lists('name','id');
         $positions = Position::lists('name','id');
         return view('employees.index', compact(
             'employees',
+            'user',
             'statuses',
+            'payrolls',
             'positons'));
     }
 
@@ -77,13 +81,12 @@ class EmployeesController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-
         foreach ($request->input('roles') as $key => $value) {
             $user->attachRole($value);
         }
 
         $employee = $user->employees()->create($request->all());
-       
+        $employee->payrolls()->create($request->all());
         $employee->statuses()->attach($request->input('status_list'));
         $employee->positions()->attach($request->input('position_list'));
 
@@ -120,8 +123,10 @@ class EmployeesController extends Controller
     {
         $statuses = Status::lists('name','id');
         $positions = Position::lists('name','id');
+        $roles = Role::lists('display_name','id');
         return view('employees.edit', compact(
             'positions',
+            'roles',
             'statuses',
             'employee'));
     }
@@ -146,6 +151,30 @@ class EmployeesController extends Controller
             Image::make($avatar)->resize(300,300)->save( public_path('/avatar/' . $filename ) ); 
             $employee->avatar = $filename;
             $employee->save();
+        }
+
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
+
+        $input = $request->all();
+        if(!empty($input['password'])){ 
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = array_except($input,array('password'));    
+        }
+
+        $user = User::find($id);
+        $user->update($input);
+        DB::table('role_user')->where('user_id',$id)->delete();
+
+        
+        foreach ($request->input('roles') as $key => $value) {
+            $user->attachRole($value);
         }
 
 

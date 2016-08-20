@@ -5,6 +5,15 @@
 
         <h1 class="page-header">Dashboard</h1>
 
+         @if(Auth::user()->hasRole('Administrator'))
+         @else
+            
+
+            <div id="para1" class="text-center" style="font-size: 30px;"></div>
+          
+
+          @endif
+
         @permission('role-create')
           <div class="row" >
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -22,7 +31,7 @@
                 <div class="info-box-content">
                   <span class="info-box-text">Total Regular</span>
                   <span class="info-box-number">
-                    @foreach($status->slice(2,1) as $statuss)
+                    @foreach($status->slice(0,1) as $statuss)
                           {{ $statuss->employees->count() }}
                       @endforeach
                   </span>
@@ -47,7 +56,12 @@
                 <span class="info-box-icon bg-aqua"><i class="ion-ios-locked-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Total Admin</span>
-                  <span class="info-box-number">{{$users->count()}}</span>
+                  <span class="info-box-number">
+                      @foreach($users->slice(0,1) as $user)
+                          {{ $user->roles->count() }}
+                      @endforeach
+                 
+                  </span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->

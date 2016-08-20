@@ -3,6 +3,7 @@
   <li><a href="#personal" data-toggle="tab" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i> Personal Information</a></li>
   <li class=""><a href="#contacts" data-toggle="tab" aria-expanded="false"><i class="fa fa-phone" aria-hidden="true"></i> Contacts Information</a></li>
    <li class=""><a href="#job" data-toggle="tab" aria-expanded="false"><i class="fa fa-suitcase" aria-hidden="true"></i> Job Information</a></li> 
+   <li class=""><a href="#payroll" data-toggle="tab" aria-expanded="false"><i class="fa fa-file-text-o" aria-hidden="true"></i> Payroll Information</a></li> 
 </ul>
 
 <div id="myTabContent" class="tab-content">
@@ -18,7 +19,7 @@
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label"> 
-                        {!! Form::label('name', 'Name:')  !!}
+                        {!! Form::label('name', 'Username:')  !!}
                         </label>
                            <div class="col-md-4">
                         {!! Form::text('name', null,  ['class' => 'form-control']) !!}     
@@ -76,12 +77,12 @@
                         </div>
                         </div>
 
-                          <div class="form-group">
+                          <div class="form-group hide">
                         <label class="col-md-4 control-label"> 
                         {!! Form::label('roles', 'Roles:')  !!}
                         </label>
                            <div class="col-md-4">
-                        {!! Form::select('roles[]', $roles, null,  ['class' => 'form-control','placeholder' => '--- Select a Role ---']) !!}     
+                        {!! Form::select('roles[]', $roles, 2,  ['class' => 'form-control','placeholder' => '--- Select a Role ---']) !!}     
                      
                         </div>
                         </div>
@@ -271,7 +272,7 @@
 
                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label"> 
-                        {!! Form::label('address', 'Address:')  !!}
+                        {!! Form::label('address', 'Permanent Address:')  !!}
                         </label>
                         <div class="col-md-6">
                         {!! Form::text('address', null,  ['class' => 'form-control']) !!}     
@@ -336,7 +337,7 @@
         
      <div class="form-group">
      <label class="col-md-4 control-label"> 
-     {!! Form::label('date_hired', 'Date:')  !!}
+     {!! Form::label('date_hired', 'Date hired:')  !!}
     </label>
     <div class="col-md-6">
         {!! Form::input('date', 'date_hired', $employee->date_hired, ['class' => 'form-control']) !!}         
@@ -393,8 +394,76 @@
     </div>
     </div>
 
+  <div class="row">
+                    <div class="col-md-6">
+                     <a class="pull-left btnPrevious btn btn-default btn-sm" >Previous</a>
+                    </div>
 
-     <div class="row">
+                    <div class="col-md-6">
+                 <a class="pull-right btnNext btn btn-primary btn-sm" >Next</a>
+                    </div>
+                   </div> 
+ 
+    </p>
+  </div>
+
+
+  <div class="tab-pane fade" id="payroll">
+    <p style="padding-bottom: 10px">
+
+                        <div class="form-group{{ $errors->has('meal_allowance') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('meal_allowance', 'Meal Allowance:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::text('meal_allowance', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('meal_allowance'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('meal_allowance') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('transportation') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('transportation', 'Transportation:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::text('transportation', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('transportation'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('transportation') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+
+                     
+
+
+                        <div class="form-group{{ $errors->has('basic_pay') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('basic_pay', 'Basic Pay:')  !!}
+                        </label>
+                           <div class="col-md-4">
+                        {!! Form::text('basic_pay', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('basic_pay'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('basic_pay') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+
+
+    <div class="row">
                     <div class="col-md-6">
                          <a class="pull-left btnPrevious btn btn-default btn-sm" >Previous</a>
                     </div>
@@ -403,8 +472,11 @@
                    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary pull-right'])  !!}
                     </div>
                    </div> 
+
+
+
     </p>
-  </div>
+    </div>
 </div>    
 
 

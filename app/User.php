@@ -31,9 +31,16 @@ class User extends Authenticatable
         return $this->hasOne('App\Employee');
     }
 
+
     public function announcements()
     {
         return $this->hasMany('App\Announcement');
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
 
 }
