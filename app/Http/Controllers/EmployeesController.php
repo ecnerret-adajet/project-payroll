@@ -12,7 +12,8 @@ use App\User;
 use App\Employee;
 use Image;
 use App\Status;
-use App\Position;
+use App\Basic;
+use App\Quantity;
 use Carbon\Carbon;
 use App\Role;
 use App\Payroll;
@@ -38,13 +39,15 @@ class EmployeesController extends Controller
         $user = User::all();
         $payrolls = Payroll::with('employees')->get();
         $statuses = Status::lists('name','id');
-        $positions = Position::lists('name','id');
+        $basics = Basic::lists('position','id');
+        $quantities = Quantity::lists('position','id');
         return view('employees.index', compact(
             'employees',
             'user',
             'statuses',
             'payrolls',
-            'positons'));
+            'quantities',
+            'basics'));
     }
 
     /**
@@ -56,9 +59,10 @@ class EmployeesController extends Controller
     {
         $employees = Employee::all();
         $statuses = Status::lists('name','id');
-        $positions = Position::lists('name','id');
+         $basics = Basic::lists('position','id')->all();
+        $quantities = Quantity::lists('position','id')->all();
          $roles = Role::lists('display_name','id');
-        return view('employees.create', compact('statuses','positions','employees','roles'));
+        return view('employees.create', compact('statuses','basics','quantities','employees','roles'));
     }
 
     /**
@@ -88,7 +92,8 @@ class EmployeesController extends Controller
         $employee = $user->employees()->create($request->all());
         $employee->payrolls()->create($request->all());
         $employee->statuses()->attach($request->input('status_list'));
-        $employee->positions()->attach($request->input('position_list'));
+        $employee->basics()->attach((!$request->input('basic_list') ? [] : $request->input('basic_list')));
+        $employee->quantities()->attach((!$request->input('quantity_list') ? [] : $request->input('quantity_list')));
 
         if($request->hasFile('avatar')){
             $avatar = $request->file('avatar');
@@ -122,10 +127,12 @@ class EmployeesController extends Controller
     public function edit(Employee $employee)
     {
         $statuses = Status::lists('name','id');
-        $positions = Position::lists('name','id');
+        $basics = Basic::lists('position','id');
+        $quantities = Quantity::lists('position','id');
         $roles = Role::lists('display_name','id');
         return view('employees.edit', compact(
-            'positions',
+            'basics',
+            'quantities',
             'roles',
             'statuses',
             'employee'));
@@ -142,7 +149,8 @@ class EmployeesController extends Controller
     {
         $employee->update($request->all());
         $employee->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
-        $employee->positions()->sync((!$request->input('position_list') ? [] : $request->input('position_list')));
+        $employee->basics()->sync((!$request->input('basic_list') ? [] : $request->input('basic_list')));
+        $employee->quantities()->sync((!$request->input('quantity_list') ? [] : $request->input('quantity_list')));
 
 
         if($request->hasFile('avatar')){

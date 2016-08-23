@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Employee;
 use App\Status;
-use App\Position;
+use App\Basic;
+use App\Quantity;
 use App\Role;
 use Auth;
 use Carbon\Carbon;
@@ -36,7 +37,8 @@ class HomeController extends Controller
             $statuses = Status::all();
             $announcements = Announcement::orderBy('created_at','desc')->take(1)->get();
             $status = Status::with('employees')->get();
-            $positions = Position::all();
+            $basics = Basic::lists('position','id');
+            $quantities = Quantity::lists('position','id');
             $users = User::all();
             $roles = Role::all();
 
@@ -46,7 +48,8 @@ class HomeController extends Controller
                 'roles',
                 'status',
                 'announcements',
-                'positions'));
+                'quantities',
+                'basics'));
     }
 
 

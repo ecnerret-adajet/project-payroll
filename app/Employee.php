@@ -72,15 +72,26 @@ class Employee extends Model
         return $this->statuses->lists('id')->all();
     }
 
-    /* list positions per employee */
-    public function positions()
+    /* list basic position per employee */
+    public function basics()
     {
-        return $this->belongsToMany('App\Position')->withTimestamps();
+        return $this->belongsToMany('App\Basic')->withTimestamps();
     }
 
-    public function getPositionListAttribute()
+    public function getBasicListAttribute()
     {
-        return $this->positions->lists('id')->all();
+        return $this->basics->lists('id')->all();
+    }
+
+    /* list quantity position per employee */
+    public function quantities()
+    {
+        return $this->belongsToMany('App\Quantity')->withTimestamps();
+    }
+
+    public function getQuantityListAttribute()
+    {
+        return $this->quantities->lists('id')->all();
     }
 
 

@@ -150,6 +150,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
+   
 
      <!-- bootstsrap modal -->
     <script src="{{ asset('/js/laravel-bootstrap-modal-form.js') }}"></script>
@@ -166,6 +167,24 @@
     <script src="{{ asset('js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+
+
+  <script type="text/javascript">
+$(document).ready(function(){
+    $('input[type="radio"]').click(function(){
+        if($(this).attr("value")=="basicpay"){
+            $(".employee_type").not(".basicpay").hide();
+            $(".basicpay").show();
+        }
+        if($(this).attr("value")=="perquantity"){
+            $(".employee_type").not(".perquantity").hide();
+            $(".perquantity").show();
+        }
+      
+    });
+});
+</script>
+
 
 
 

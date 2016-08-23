@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePositionsTable extends Migration
+class CreateBasicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,19 @@ class CreatePositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('basics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('position');
+            $table->string('salary');
             $table->timestamps();
         });
 
-        Schema::create('employee_position', function (Blueprint $table){
+        Schema::create('basic_employee', function (Blueprint $table){
             $table->integer('employee_id')->unsigned()->index();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 
-            $table->integer('position_id')->unsigned()->index();
-            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->integer('basic_id')->unsigned()->index();
+            $table->foreign('basic_id')->references('id')->on('basics')->onDelete('cascade');
 
             $table->timestamps();
 
@@ -37,7 +38,7 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('employee_position');
-        Schema::drop('positions');
+        Schema::drop('basic_employee');
+        Schema::drop('basics');
     }
 }

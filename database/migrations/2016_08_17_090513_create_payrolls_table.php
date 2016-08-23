@@ -15,13 +15,11 @@ class CreatePayrollsTable extends Migration
         Schema::create('payrolls', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
-            $table->integer('dozen');
             $table->integer('meal_allowance');
             $table->integer('transportation');
             $table->integer('basic_pay');
-            $table->integer('taxable_allowance');
             $table->integer('gross_pay');
-            $table->integer('wilholding_tax');
+            $table->integer('withholding_tax');
             $table->integer('sss_contribution');
             $table->integer('philhealth_contribution');
             $table->integer('pagibig_contribution');

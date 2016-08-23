@@ -5,3 +5,7 @@
 *:not(.img-circle){
 	border-radius: 0 ! important;
 }
+
+.employee_type{
+	display: none;
+}
