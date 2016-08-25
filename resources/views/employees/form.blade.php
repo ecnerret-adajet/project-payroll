@@ -447,7 +447,7 @@
 
                         <div class="perquantity employee_type form-group{{ $errors->has('transportation') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label"> 
-                        {!! Form::label('transportation', 'Transportation:')  !!}
+                        {!! Form::label('transportation', 'Transportation Allowance:')  !!}
                         </label>
                            <div class="col-md-4">
                         {!! Form::text('transportation', null,  ['class' => 'form-control']) !!}     
@@ -484,7 +484,7 @@
                          <a class="pull-left btnPrevious btn btn-default btn-sm" >Previous</a>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 pull-right">
                    {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary pull-right'])  !!}
                     </div>
                    </div> 

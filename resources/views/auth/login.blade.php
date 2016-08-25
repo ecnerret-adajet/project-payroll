@@ -191,7 +191,7 @@
 
  <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card img-circle" src="{{asset('/img/logo.png')}}" />
+            <img id="profile-img" class="profile-img-card img-circle" src="{{asset('/avatar/placeholder.png')}}" />
             <p id="profile-name" class="profile-name-card"></p>
     <form class="form-horizontal form-signin" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}

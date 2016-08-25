@@ -19,7 +19,7 @@ class CreateBasicsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('basic_employee', function (Blueprint $table){
+        Schema::create('basic_employee', function (Blueprint $table) {
             $table->integer('employee_id')->unsigned()->index();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
 

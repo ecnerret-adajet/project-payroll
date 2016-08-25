@@ -65,7 +65,7 @@
                       {{ (date("d/m/Y", strtotime($employee->date_hired)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($employee->date_hired)) )  }}
                   </td>
                   <td>
-                    {{ $employee->payrolls->basic_pay}}
+                    {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : $employee->salaries->basic_pay )}}
                   </td>
                   <td>
                   <a class="bootstrap-modal-form-open" data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="" style="padding-right: 10px;">

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
 use App\Http\Requests;
 use App\Payroll;
+use App\Salary;
 use App\User;
 use App\Employee;
 use App\Role;
@@ -32,7 +33,11 @@ class PayrollsController extends Controller
      */
     public function create()
     {
-        return view('payrolls.create');
+        $employees = Employee::all();
+        $salaries = Salary::with('employees');
+        return view('payrolls.create', compact(
+            'salaries',
+            'employees'));
     }
 
     /**

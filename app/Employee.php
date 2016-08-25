@@ -32,6 +32,11 @@ class Employee extends Model
         'date_hired'
     ];
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) .' ' . ucfirst($this->last_name);
+    }
+
     /* list user table */
 
     public function setBirthdateAttribute($date)
@@ -98,16 +103,22 @@ class Employee extends Model
 
     /* list attendance to employees table */
 
-    public function attendance()
+    public function attendances()
     {
         return $this->hasOne('App\Attendance');
     }
 
-    /* list payroll's employee */
+    /* list salaries employee */
 
-    public function payrolls()
+    public function salaries()
     {
-        return $this->hasOne('App\Payroll','employee_id','id');
+        return $this->hasOne('App\Salary','employee_id','id');
+    }
+
+    /* get employee to perday stats */
+    public function perdays()
+    {
+        return $this->belongsToMany('App\Perday');
     }
 
 

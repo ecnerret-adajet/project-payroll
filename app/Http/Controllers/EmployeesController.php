@@ -16,7 +16,7 @@ use App\Basic;
 use App\Quantity;
 use Carbon\Carbon;
 use App\Role;
-use App\Payroll;
+use App\Salary;
 use DB;
 use Hash;
 
@@ -37,7 +37,7 @@ class EmployeesController extends Controller
     {
         $employees = Employee::all();
         $user = User::all();
-        $payrolls = Payroll::with('employees')->get();
+        $salaries = Salary::with('employees')->get();
         $statuses = Status::lists('name','id');
         $basics = Basic::lists('position','id');
         $quantities = Quantity::lists('position','id');
@@ -45,7 +45,7 @@ class EmployeesController extends Controller
             'employees',
             'user',
             'statuses',
-            'payrolls',
+            'salaries',
             'quantities',
             'basics'));
     }
@@ -90,7 +90,7 @@ class EmployeesController extends Controller
         }
 
         $employee = $user->employees()->create($request->all());
-        $employee->payrolls()->create($request->all());
+        $employee->salaries()->create($request->all());
         $employee->statuses()->attach($request->input('status_list'));
         $employee->basics()->attach((!$request->input('basic_list') ? [] : $request->input('basic_list')));
         $employee->quantities()->attach((!$request->input('quantity_list') ? [] : $request->input('quantity_list')));

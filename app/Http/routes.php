@@ -24,6 +24,7 @@ Route::resource('announcements','AnnouncementsController');
 Route::resource('users','UserController');
 Route::resource('employees','EmployeesController');
 Route::resource('payrolls','PayrollsController');
+Route::resource('perdays','PerdaysController');
 
 
 Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);

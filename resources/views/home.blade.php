@@ -116,8 +116,11 @@
                   {{$employee->first_name}} {{$employee->middle_name}} {{$employee->last_name}}    
                   </td>
                   <td>
-                  @foreach($employee->positions as $position)
-                    {{$position->name}}
+                @foreach($employee->basics as $basic)
+                    {{$basic->position}}
+                  @endforeach
+                  @foreach($employee->quantities as $quantity)
+                    {{$quantity->position}}
                   @endforeach
                   </td>
                   <td>

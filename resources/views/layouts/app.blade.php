@@ -22,6 +22,9 @@
 
     <!-- Styles -->
 
+    <!-- select 2 -->
+    <link href="{{asset('/css/select2.min.css')}}" rel="stylesheet" />
+
     <!-- Datatables styles   -->
     <link href="{{ asset('/css/dataTables.tableTools.css') }}" rel="stylesheet" >
     <link href="{{ asset('/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
@@ -150,8 +153,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
-   
-
+    <!-- select2 js plugin -->
+    <script src="{{asset('js/select2.min.js')}}"></script>
      <!-- bootstsrap modal -->
     <script src="{{ asset('/js/laravel-bootstrap-modal-form.js') }}"></script>
          <!-- datatables   -->  
@@ -221,6 +224,15 @@ $(document).ready(function(){
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+    </script>
+
+
+    <!-- select2 plugin -->
+    <script>
+      $(".select2").select2({
+       placeholder: "Select an employee",
+       allowClear: true
+        });
     </script>
 
     <script>
