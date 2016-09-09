@@ -98,9 +98,15 @@
         <tr>
       <td> Position:</td>
       <td>
-       @foreach($employee->positions as $position)
-      {{$position->name}}
-    @endforeach
+     
+    @foreach($employee->basics as $basic)
+                    {{$basic->position}}
+                  @endforeach
+                  @foreach($employee->quantities as $quantity)
+                    {{$quantity->position}}
+                  @endforeach
+
+     
 
       </td>
     </tr>

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 class Payroll extends Model
 {
     protected $fillable = [
+        'employee_id',
     	'start_period',
         'end_period',
         'dozen',
@@ -54,7 +55,7 @@ class Payroll extends Model
 
     public function employees()
     {
-        return $this->belongsToMany('App\Employee')->withTimestatmps();
+        return $this->belongsToMany('App\Employee')->withTimestamps();
     }
 
     public function getEmployeeListAttribute()
@@ -71,6 +72,7 @@ class Payroll extends Model
     {
         return $this->hasManyThrough('App\Attendance', 'App\Employee');
     }
+
 
 
 

@@ -35,7 +35,7 @@
                          {!! Form::label('publish_at', 'Publish Date:')  !!}
                         </label>
                         <div class="col-md-6">
-                            {!! Form::input('date', 'publish_at', $announcement->publish_at, ['class' => 'form-control']) !!}         
+                            {!! Form::input('date', 'publish_at', date('Y-m-d'), ['class' => 'form-control']) !!}         
                          </div>
                          </div>
 

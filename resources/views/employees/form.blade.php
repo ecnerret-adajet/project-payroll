@@ -243,7 +243,7 @@
                         {!! Form::label('mobile_no', 'Mobile Number:')  !!}
                         </label>
                         <div class="col-md-4">
-                        {!! Form::number('mobile_no', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('mobile_no', null,  ['class' => 'form-control', "data-inputmask" => "'mask': '+63999-9999-999'", 'data-mask' ]) !!}     
 
                         @if ($errors->has('mobile_no'))
                         <span class="help-block">
@@ -308,7 +308,7 @@
     {!! Form::label('status_list', 'Employee Status:')  !!} 
     </label>
     <div class="col-md-4">
-    {!! Form::select('status_list[]', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee Status --']) !!}
+    {!! Form::select('status_list', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee Status --']) !!}
 
     @if ($errors->has('status_list'))
     <span class="help-block">
@@ -384,7 +384,7 @@
     {!! Form::label('pagibig_no', 'Pagibig Num:')  !!}
     </label>
     <div class="col-md-4">
-    {!! Form::text('pagibig_no', null,  ['class' => 'form-control']) !!}     
+    {!! Form::text('pagibig_no', null,  ['class' => 'form-control', "data-inputmask" => "'mask': '9999-9999-9999'", 'data-mask']) !!}     
 
     @if ($errors->has('pagibig_no'))
     <span class="help-block">
@@ -399,8 +399,7 @@
     {!! Form::label('sss_no', 'SSS Num:')  !!}
     </label>
     <div class="col-md-4">
-    {!! Form::text('sss_no', null,  ['class' => 'form-control']) !!}     
-
+    {!! Form::text('sss_no', null,  ["class" => "form-control", "data-inputmask" => "'mask': '99-9999999-9'", 'data-mask' ]) !!}     
     @if ($errors->has('sss_no'))
     <span class="help-block">
     <strong>{{ $errors->first('sss_no') }}</strong>

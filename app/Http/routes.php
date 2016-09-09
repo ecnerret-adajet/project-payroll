@@ -17,6 +17,15 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::get('/logs', 'HomeController@logs');
+
+Route::get('api/employees', function() {
+	return App\Employee::latest()->get();
+});
+
+Route::get('/getdata', 'HomeController@getdata');
+
+
 Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/home', 'HomeController@index');
@@ -24,7 +33,11 @@ Route::resource('announcements','AnnouncementsController');
 Route::resource('users','UserController');
 Route::resource('employees','EmployeesController');
 Route::resource('payrolls','PayrollsController');
+Route::get('/showpayslips', 'HomeController@showpayslips');
+
+
 Route::resource('perdays','PerdaysController');
+Route::resource('attendances','attendancesController');
 
 Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);
 Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create','middleware' => ['permission:role-create']]);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\AttendanceRequest;
 use App\Http\Requests;
 use App\User;
 use App\Employee;
@@ -21,7 +21,10 @@ class AttendancesController extends Controller
      */
     public function index()
     {
-        return view('attendances.index');
+        $attendances = Attendance::orderBy('created_at','asc')->where('created_at', '<=', Carbon::now())->get();
+        $current = Carbon::now();
+        $employees = Employee::with('attendances');
+        return view('attendance.index', compact('attendances','employees','current'));
     }
 
     /**
@@ -40,10 +43,11 @@ class AttendancesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AttendanceRequest $request)
     {
-        $input = $request->all();
-        $attendance = Attendance::create($input);
+
+        $attendance = Attendance::create($request->all()); 
+        $attendance->employees()->attach($request->input('employee_list'));
 
         return redirect('attendances');
     }

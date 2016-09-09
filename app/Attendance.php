@@ -24,7 +24,12 @@ class Attendance extends Model
 
     public function employees()
     {
-        return $this->belongsTo('App\Employee');
+        return $this->belongsToMany('App\Employee')->withTimestamps();
+    }
+
+    public function getEmployeeListAttribute()
+    {
+        return $this->employees->lists('id')->all();
     }
 
     /* set time in value */

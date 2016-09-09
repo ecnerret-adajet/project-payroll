@@ -23,7 +23,7 @@ class PerdaysController extends Controller
      */
     public function index()
     {
-        $perdays = Perday::all();
+        $perdays = Perday::orderBy('created_at','asc')->where('created_at', '<=', Carbon::now())->get();
         $employees = Employee::all();
         return view('perdays.index', compact(
             'employees',

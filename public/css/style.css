@@ -7,3 +7,17 @@
 .employee_type{
 	display: none;
 }
+
+@media print {
+  
+.no-print, .no-print *
+    {
+        display: none !important;
+    }
+
+.print-style{
+	border-bottom: dashed 1px #000;
+	margin-top: 20px ! important;
+}
+
+}

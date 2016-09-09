@@ -105,7 +105,7 @@ class Employee extends Model
 
     public function attendances()
     {
-        return $this->hasOne('App\Attendance');
+        return $this->belongsToMany('App\Attendance');
     }
 
     /* list salaries employee */
@@ -120,6 +120,39 @@ class Employee extends Model
     {
         return $this->belongsToMany('App\Perday');
     }
+
+
+    /* list all payroll data to employees */
+    public function payrolls()
+    {
+        return $this->belongsToMany('App\Payroll');
+    }
+
+    /*attendance time in record */
+
+   public function timeins()
+    {
+        return $this->belongsToMany('App\Timein')->withTimestamps();
+    }
+
+    public function getTimeInAttribute()
+    {
+        return $this->timeins->lists('id')->all();
+    }
+
+
+    public function timeouts()
+    {
+        return $this->belongsToMany('App\Timeout')->withTimestamps();
+    }
+
+    public function getTimeOutAttribute()
+    {
+        return $this->timeouts->lists('id')->all();
+    }
+
+
+
 
 
 

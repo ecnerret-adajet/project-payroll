@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
+     <!-- select 2 -->
+    <link href="{{asset('/css/select2.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/radio.css')}}" rel="stylesheet" />
+
     <!-- Styles -->
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
@@ -25,54 +29,30 @@
         .fa-btn {
             margin-right: 6px;
         }
+
     </style>
+    <script type="text/javascript"> 
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
+
+function display_ct() {
+var strcount
+var x = new Date()
+var x1=x.toDateString(); 
+x1 = x1 + "  " + x.getHours( )+ ":" + x.getMinutes() + ":" + x.getSeconds();
+document.getElementById('ct').innerHTML = x1;
+document.getElementById('ct').style.fontSize='30px';
+document.getElementById('ct').style.color='#0030c0';
+document.getElementById('ct').innerHTML = x1;
+
+tt=display_c();
+}
+
+</script>
 </head>
-<body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                MRQK Payroll
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body onload=display_ct(); id="app-layout">
 
 
     <div class="container">
@@ -100,6 +80,41 @@
     <!-- JavaScripts -->
      <script src="{{asset('js/jquery.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
+           <!-- select2 js plugin -->
+    <script src="{{asset('js/select2.min.js')}}"></script>
+
+    
+    <!-- select2 plugin -->
+    <script>
+      $(".select2").select2({
+       placeholder: "Select an employee time in",
+       allowClear: true
+        });
+    </script>
+
+      <script>
+      $(".select3").select2({
+       placeholder: "Select an employee time out",
+       allowClear: true
+        });
+    </script>
+
+
+          <script type="text/javascript">
+$(document).ready(function(){
+    $('input[type="radio"]').click(function(){
+        if($(this).attr("value")=="basicpay"){
+            $(".employee_type").not(".basicpay").hide();
+            $(".basicpay").show();
+        }
+        if($(this).attr("value")=="perquantity"){
+            $(".employee_type").not(".perquantity").hide();
+            $(".perquantity").show();
+        }
+      
+    });
+});
+</script>
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

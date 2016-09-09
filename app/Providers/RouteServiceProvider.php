@@ -32,6 +32,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('payrolls','App\Payroll');
         $router->model('announcements','App\Announcement');
         $router->model('perdays','App\Perday');
+        $router->model('attendances','App\Attendances');
     }
 
     /**

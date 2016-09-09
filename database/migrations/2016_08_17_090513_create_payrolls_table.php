@@ -29,6 +29,7 @@ class CreatePayrollsTable extends Migration
             $table->timestamps();
         });
 
+
         Schema::create('employee_payroll', function (Blueprint $table){
             $table->integer('employee_id')->unsigned()->index();
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
@@ -36,6 +37,8 @@ class CreatePayrollsTable extends Migration
             $table->foreign('payroll_id')->references('id')->on('payrolls')->onDelete('cascade');
             $table->timestamps();
         });
+
+   
     }
 
     /**

@@ -115,7 +115,18 @@ class EmployeesController extends Controller
      */
     public function show(Employee $employee)
     {
-        return view('employees.show', compact('employee'));
+        $user = User::all();
+        $salaries = Salary::with('employees')->get();
+        $statuses = Status::lists('name','id');
+        $basics = Basic::lists('position','id');
+        $quantities = Quantity::lists('position','id');
+        return view('employees.show', compact(
+            'employee',
+            'user',
+            'statuses',
+            'salaries',
+            'quantities',
+            'basics'));
     }
 
     /**

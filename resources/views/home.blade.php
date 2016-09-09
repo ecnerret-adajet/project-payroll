@@ -129,10 +129,16 @@
                   @endforeach
                   </td>
                   <td>
-                    0000-00-00
+                                   
+                  @foreach($employee->attendances->slice(1,1) as $attendances)
+                    {{$attendances->time_in}}
+                  @endforeach
+
                   </td>
                   <td>
-               0000-00-00
+                      @foreach($employee->attendances->slice(0,1) as $attendances)
+                    {{$attendances->time_out}}
+                  @endforeach
                   </td>
                 </tr>
               @endforeach

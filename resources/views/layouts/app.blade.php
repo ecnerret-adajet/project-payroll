@@ -7,8 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
+    <link rel="icon" href="{{asset('/img/logo.png')}}" style="height: 30px; width: auto;">
 
         <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -50,7 +49,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link media="print" href="{{asset('css/style.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -123,11 +122,15 @@
             <li><a href="{{url('/employees')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Employees</a></li>
             @endpermission
 
+             @permission('role-create')
+            <li><a href="{{url('/perdays')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Per day record </a></li>
+            @endpermission
+
          
 
 
             @permission('role-create')
-               <li><a href="#"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
+               <li><a href="{{url('/attendances')}}"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
             <li><a href="{{url('/payrolls')}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslips</a></li>
             <li><a href="{{url('/users')}}"><i class="fa fa-users" style="padding-right: 5px;" aria-hidden="true"></i> Users</a></li>
             @endpermission
@@ -170,6 +173,28 @@
     <script src="{{ asset('js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+
+      <!-- InputMask -->
+    <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}" type="text/javascript"></script>
+    <script src="{{asset('plugins/input-mask/jquery.inputmask.extensions.js')}}" type="text/javascript"></script>
+
+        <script type="text/javascript">
+      $(function () {
+ 
+        $("[data-mask]").inputmask();
+
+       
+      });
+    </script>
+
+
+    <!-- print payroll -->
+
+    <script>
+function myFunction() {
+    window.print();
+}
+</script>
 
 
   <script type="text/javascript">
@@ -230,6 +255,13 @@ $(document).ready(function(){
     <!-- select2 plugin -->
     <script>
       $(".select2").select2({
+       placeholder: "Select an employee",
+       allowClear: true
+        });
+    </script>
+
+    <script>
+      $(".select3").select2({
        placeholder: "Select an employee",
        allowClear: true
         });
