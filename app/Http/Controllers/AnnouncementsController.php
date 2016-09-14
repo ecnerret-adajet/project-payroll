@@ -89,8 +89,9 @@ class AnnouncementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Announcement $announcement)
     {
-        //
+        $announcement->delete();
+        return redirect('announcements');
     }
 }

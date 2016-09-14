@@ -34,6 +34,17 @@
       </td>
     </tr>
 
+        <tr>
+      <th>Employee Status</th>
+      <td>
+           @foreach($payroll->employees as $employee)
+              @foreach($employee->statuses as $status)
+          {{$status->name}}
+              @endforeach
+        @endforeach        
+      </td>
+    </tr>
+
 
       <tr>
       <th>Position</th>
@@ -73,10 +84,28 @@
                @foreach($employee->perdays as $perday)
                   {{ $sum += $perday->total_quantity }} 
                @endforeach
-        @endforeach
+        @endforeach 
         </span>
 
-            {{$sum}}
+            {{$sum}} dozen
+      </td>
+    </tr>
+
+    <tr>
+      <th>Meal allowance</th>
+      <td>
+        @foreach($payroll->employees as $employee)
+           PHP {{ $employee->salaries->meal_allowance }}.00
+        @endforeach   
+      </td>
+    </tr>
+
+      <tr>
+      <th>transportation</th>
+      <td>
+        @foreach($payroll->employees as $employee)
+           PHP {{ $employee->salaries->transportation }}.00
+        @endforeach   
       </td>
     </tr>
 
@@ -139,7 +168,9 @@
                   @endforeach
         </span>
 
-         {{$total += $employee->salaries->basic_pay - $ssspay - $pagpay}}
+        PHP {{$total += $employee->salaries->basic_pay + $employee->salaries->meal_allowance +  $employee->salaries->transportation - $ssspay - $pagpay}}.00
+
+
         @endforeach
 
 

@@ -39,25 +39,15 @@ class Employee extends Model
 
     /* list user table */
 
-    public function setBirthdateAttribute($date)
-    {
-          $this->attributes['birthdate'] = Carbon::parse($date);
-    }
 
     public function getBirthdateAttribute($date)
     {
-         return new Carbon($date);
+         return Carbon::parse($date)->format('m/d/Y');
     }
 
-
-    public function setDateHiredAttribute($date)
+     public function getDateHiredAttribute($date)
     {
-         $this->attributes['date_hired'] = Carbon::parse($date);
-    }
-
-    public function getDateHiredAttribute($date)
-    {
-            return new Carbon($date);
+         return Carbon::parse($date)->format('m/d/Y');
     }
 
 

@@ -12,7 +12,8 @@ use App\User;
 use App\Employee;
 use App\Perday;
 use Carbon\Carbon;
-
+use App\Quantity;
+use DB;
 
 class PerdaysController extends Controller
 {
@@ -37,7 +38,10 @@ class PerdaysController extends Controller
      */
     public function create()
     {
-        $employees = Employee::lists('first_name','id');
+       
+            $employees = Employee::lists('first_name','id');
+         
+
         return view('perdays.create', compact('employees'));
     }
 

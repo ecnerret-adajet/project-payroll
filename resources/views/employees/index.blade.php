@@ -68,8 +68,8 @@
                     {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : $employee->salaries->basic_pay )}}
                   </td>
                   <td>
-                  <a class="bootstrap-modal-form-open" data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="" style="padding-right: 10px;">
-                  <i class="fa fa-eye fa-2x" aria-hidden="true"></i>
+                  <a class="bootstrap-modal-form-open btn btn-primary" data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="" style="padding-right: 10px;">
+                  <i class="fa fa-eye" aria-hidden="true"></i> View
                   </a>
                   </td>
                 </tr>
@@ -103,158 +103,149 @@
                 </center>
 
 
-     <h3>Personal Information</h3>
-    <table class="table table-striped table-hover ">
-  <tbody>
-    <tr>
-      <td>Full Name</td>
-      <td>{{$employee->first_name}} {{$employee->middle_name}}, {{$employee->last_name}}</td>
-    </tr>
-        <tr>
-      <td>Birthdate:</td>
-      <td> {{  date('m/d/Y', strtotime($employee->birthdate))  }}</td>
-    </tr>
+              <ul class="nav nav-tabs">
+              <li class="active"><a href="#personal-{{$employee->id}}" data-toggle="tab">Personal Information</a></li>
+              <li><a href="#contact-{{$employee->id}}" data-toggle="tab">Contact Information</a></li>
+              <li><a href="#job-{{$employee->id}}" data-toggle="tab">Job Information</a></li>
+            </ul>
 
-    <tr>
-      <td>   Age:</td>
-      <td>   {{$employee->age}}</td>
-    </tr>
-  <tr>
-      <td>Civil Status:</td>
-      <td>{{$employee->civil_status}}</td>
-    </tr> 
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="personal-{{$employee->id}}">
+                <p class="padding: 10px;">
+                  
+                   <h3>Personal Information</h3>
+                          <table class="table table-striped table-hover ">
+                        <tbody>
+                          <tr>
+                            <td>Full Name</td>
+                            <td>{{$employee->first_name}} {{$employee->middle_name}}, {{$employee->last_name}}</td>
+                          </tr>
+                              <tr>
+                            <td>Birthdate:</td>
+                            <td> {{  date('m/d/Y', strtotime($employee->birthdate))  }}</td>
+                          </tr>
 
-  <tr>
-      <td> Gender:</td>
-      <td>{{$employee->gender}}</td>
-    </tr> 
-     </tbody>
-</table>  
+                          <tr>
+                            <td>   Age:</td>
+                            <td>   {{$employee->age}}</td>
+                          </tr>
+                        <tr>
+                            <td>Civil Status:</td>
+                            <td>{{$employee->civil_status}}</td>
+                          </tr> 
 
-<h3>Contacts Information</h3>
+                           <tr>
+                            <td> Address:</td>
+                            <td>{{$employee->address}}</td>
+                          </tr>
 
+                        <tr>
+                            <td> Gender:</td>
+                            <td>{{$employee->gender}}</td>
+                          </tr> 
+                           </tbody>
+                      </table>  
 
-        <table class="table table-striped table-hover ">
-  <tbody>
-    <tr>
-      <td>  Mobile Number:</td>
-      <td> {{$employee->mobile_no}}</td>
-    </tr>
-
-     <tr>
-      <td> Telephone Number:</td>
-      <td> {{$employee->telephone}}</td>
-    </tr>
-
-      <tr>
-      <td> Address:</td>
-      <td>{{$employee->address}}</td>
-    </tr>
-
-      <tr>
-      <td> Address:</td>
-      <td>{{$employee->address}}</td>
-    </tr>
-   
-     </tbody>
-</table>  
+                </p>
+              </div>
 
 
-   <h3>Job Information</h3>
+                <div class="tab-pane fade" id="contact-{{$employee->id}}">
+                <p class="padding: 10px;">
+                  
+                   <h3>Contacts Information</h3>
+                          <table class="table table-striped table-hover ">
+                          <tbody>
+                            <tr>
+                              <td>  Mobile Number:</td>
+                              <td> {{$employee->mobile_no}}</td>
+                            </tr>
+
+                             <tr>
+                              <td> Telephone Number:</td>
+                              <td> {{$employee->telephone}}</td>
+                            </tr>
+                             </tbody>
+                        </table>  
+
+                </p>
+              </div>
+
+
+                <div class="tab-pane fade" id="job-{{$employee->id}}">
+                <p class="padding: 10px;">
+                    
+                    <h3>Job Information</h3>
 
 
 
           <table class="table table-striped table-hover ">
-  <tbody>
-    <tr>
-      <td>   Employee Status:</td>
-      <td>
-           @foreach($employee->statuses as $status)
-      {{$status->name}}
-    @endforeach
+                  <tbody>
+                    <tr>
+                      <td>   Employee Status:</td>
+                      <td>
+                           @foreach($employee->statuses as $status)
+                      {{$status->name}}
+                    @endforeach
 
-      </td>
-    </tr>
+                      </td>
+                    </tr>
 
-        <tr>
-      <td> Position:</td>
-      <td>
-      @foreach($employee->basics as $basic)
-                    {{$basic->position}}
-                  @endforeach
-                  @foreach($employee->quantities as $quantity)
-                    {{$quantity->position}}
-                  @endforeach
+                        <tr>
+                      <td> Position:</td>
+                      <td>
+                      @foreach($employee->basics as $basic)
+                                    {{$basic->position}}
+                                  @endforeach
+                                  @foreach($employee->quantities as $quantity)
+                                    {{$quantity->position}}
+                                  @endforeach
 
-      </td>
-    </tr>
-
-
-          <tr>
-      <td>Date hired:</td>
-      <td>
-      {{  date('m/d/Y', strtotime($employee->date_hired))  }}
-      </td>
-    </tr>
+                      </td>
+                    </tr>
 
 
-           <tr>
-      <td>Pagibig Number:</td>
-      <td>
-    {{$employee->pagibig_no}}
-
-      </td>
-    </tr>
-
+                          <tr>
+                      <td>Date hired:</td>
+                      <td>
+                      {{  date('m/d/Y', strtotime($employee->date_hired))  }}
+                      </td>
+                    </tr>
 
 
-           <tr>
-      <td> SSS Number:</td>
-      <td>
-   {{$employee->sss_no}}
+                           <tr>
+                      <td>Pagibig Number:</td>
+                      <td>
+                    {{$employee->pagibig_no}}
 
-      </td>
-    </tr>
-
-
-         <tr>
-      <td> Salary Type:</td>
-      <td>
-    {{$employee->salary_type}}
-
-      </td>
-    </tr>
-     </tbody>
-</table>  
-   
-    
-     
+                      </td>
+                    </tr>
 
 
 
+                           <tr>
+                      <td> SSS Number:</td>
+                      <td>
+                   {{$employee->sss_no}}
+
+                      </td>
+                    </tr>
 
 
+                         <tr>
+                      <td> Salary Type:</td>
+                      <td>
+                    {{$employee->salary_type}}
+
+                      </td>
+                    </tr>
+                     </tbody>
+                </table>  
+                </p>
+               </div>
 
 
-                      
-
-
-
-  
-
-
-
-                        
-                        
-
-
-            
-
-            
-
- 
-
-
+            </div>
                     
             </div>
         </div>
@@ -263,6 +254,7 @@
 
       </div><!-- end modal body -->
       <div class="modal-footer">
+        <a  class="btn btn-primary pull-left" href="{{url('employees/'.$employee->id.'/edit')}}"><i class="fa fa"></i> Modify</a>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           
                

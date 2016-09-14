@@ -49,7 +49,7 @@ class AttendancesController extends Controller
         $attendance = Attendance::create($request->all()); 
         $attendance->employees()->attach($request->input('employee_list'));
 
-        return redirect('attendances');
+        return redirect('attendances/create');
     }
 
     /**

@@ -46,7 +46,7 @@
                   </td>
 
                   <td>
-                  {{$perday->total_quantity}}
+                  {{$perday->total_quantity}} dozen
                   </td>
 
                   <td>

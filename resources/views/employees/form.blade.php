@@ -22,7 +22,10 @@
                         {!! Form::label('name', 'Username:')  !!}
                         </label>
                            <div class="col-md-4">
-                        {!! Form::text('name', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('name', ( isset($employee->user->name) ? $employee->user->name : null ),  ['class' => 'form-control']) !!} 
+
+
+            
 
                         @if ($errors->has('name'))
                         <span class="help-block">
@@ -37,7 +40,7 @@
                         {!! Form::label('email', 'Email:')  !!}
                         </label>
                            <div class="col-md-4">
-                        {!! Form::text('email', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('email', ( isset($employee->user->email) ? $employee->user->email : null ),  ['class' => 'form-control']) !!}     
 
                         @if ($errors->has('email'))
                         <span class="help-block">
@@ -164,7 +167,7 @@
                          {!! Form::label('birthdate', 'Birthdate:')  !!}
                         </label>
                         <div class="col-md-4">
-                            {!! Form::input('date', 'birthdate', $employee->birthdate, ['class' => 'form-control']) !!}         
+                            {!! Form::input('date', 'birthdate', date($employee->birthdate), ['class' => 'form-control']) !!}         
                          </div>
                          </div>
 
@@ -199,6 +202,21 @@
                         @if ($errors->has('civil_status'))
                         <span class="help-block">
                         <strong>{{ $errors->first('civil_status') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+                          <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('address', 'Permanent Address:')  !!}
+                        </label>
+                        <div class="col-md-4">
+                        {!! Form::textarea('address', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('address'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('address') }}</strong>
                         </span>
                         @endif
                         </div>
@@ -270,20 +288,7 @@
                         </div>
 
 
-                           <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label"> 
-                        {!! Form::label('address', 'Permanent Address:')  !!}
-                        </label>
-                        <div class="col-md-4">
-                        {!! Form::textarea('address', null,  ['class' => 'form-control']) !!}     
-
-                        @if ($errors->has('address'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('address') }}</strong>
-                        </span>
-                        @endif
-                        </div>
-                        </div>
+                         
 
 
                           <div class="row">
@@ -318,13 +323,15 @@
     </div>
     </div>
 
- 
+      @if(Request::path()== 'employees/'.$employee->id.'/edit')
+
+      @else
     <div class="form-group">
       <label class="col-lg-4 control-label">Employee Type</label>
       <div class="col-lg-6">
         <div class="radio">
           <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="basicpay">
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="basicpay" checked="">
             Basic Pay Employee
           </label>
         </div>
@@ -336,13 +343,24 @@
         </div>
       </div>
     </div>
+    @endif
 
+<!--- basic pay method -->
+    @if(Request::path()== 'employees/'.$employee->id.'/edit')
+      @if($employee->basic_list == null)
+
+      @else
     <div class="basicpay employee_type form-group{{ $errors->has('basic_list') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
     {!! Form::label('basic_list', 'Position:')  !!}
     </label>
     <div class="col-md-4">
-    {!! Form::select('basic_list', ['' => '--- Select position ---'] + $basics, null,  ['class' => 'form-control']) !!}     
+
+    @if(Request::path()== 'employees/create')
+    {!! Form::select('basic_list', ['' => '--- Select position ---'] + $basics, null,  ['class' => 'form-control']) !!}
+    @else
+    {!! Form::select('basic_list',  $basics, null,  ['class' => 'form-control','placeholder' => '--- Select Position ---']) !!}
+    @endif     
 
     @if ($errors->has('basic_list'))
     <span class="help-block">
@@ -351,13 +369,70 @@
     @endif
     </div>
     </div>
+    @endif
+
+    @else
+   <div class="basicpay employee_type form-group{{ $errors->has('basic_list') ? ' has-error' : '' }}">
+    <label class="col-md-4 control-label"> 
+    {!! Form::label('basic_list', 'Position:')  !!}
+    </label>
+    <div class="col-md-4">
+
+    @if(Request::path()== 'employees/create')
+    {!! Form::select('basic_list', ['' => '--- Select position ---'] + $basics, null,  ['class' => 'form-control']) !!}
+    @else
+    {!! Form::select('basic_list',  $basics, null,  ['class' => 'form-control','placeholder' => '--- Select Position ---']) !!}
+    @endif     
+
+    @if ($errors->has('basic_list'))
+    <span class="help-block">
+    <strong>{{ $errors->first('basic_list') }}</strong>
+    </span>
+    @endif
+    </div>
+    </div>
+    @endif
+   <!--- end basic pay method -->
+
+
+   <!-- per quantity position -->
+     @if(Request::path()== 'employees/'.$employee->id.'/edit')
+      @if($employee->quantity_list == null)
+
+      @else
 
     <div class="perquantity employee_type form-group{{ $errors->has('quantity_list') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
     {!! Form::label('quantity_list', 'Position:')  !!}
     </label>
     <div class="col-md-4">
-    {!! Form::select('quantity_list', ['' => '--- Select position ---'] + $quantities, null,  ['class' => 'form-control']) !!}     
+    @if(Request::path()== 'employees/create')
+    {!! Form::select('quantity_list', ['' => '--- Select position ---'] + $quantities, null,  ['class' => 'form-control']) !!}   
+    @else
+     {!! Form::select('quantity_list', $quantities, null,  ['class' => 'form-control','placeholder' => '--- Select position ---']) !!}  
+    @endif  
+
+    @if ($errors->has('quantity_list'))
+    <span class="help-block">
+    <strong>{{ $errors->first('quantity_list') }}</strong>
+    </span>
+    @endif
+    </div>
+    </div>
+    @endif
+
+    @else
+
+       <div class="perquantity employee_type form-group{{ $errors->has('quantity_list') ? ' has-error' : '' }}">
+    <label class="col-md-4 control-label"> 
+    {!! Form::label('quantity_list', 'Position:')  !!}
+    </label>
+    <div class="col-md-4">
+    @if(Request::path()== 'employees/create')
+    {!! Form::select('quantity_list', ['' => '--- Select position ---'] + $quantities, null,  ['class' => 'form-control']) !!}   
+    @else
+     {!! Form::select('quantity_list', $quantities, null,  ['class' => 'form-control','placeholder' => '--- Select position ---']) !!}  
+    @endif  
 
     @if ($errors->has('quantity_list'))
     <span class="help-block">
@@ -368,6 +443,9 @@
     </div>
 
 
+    @endif
+
+<!-- end per quantity position -->
         
      <div class="form-group">
      <label class="col-md-4 control-label"> 
@@ -433,7 +511,7 @@
                         {!! Form::label('meal_allowance', 'Meal Allowance:')  !!}
                         </label>
                            <div class="col-md-4">
-                        {!! Form::text('meal_allowance', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('meal_allowance', ( isset($employee->salaries->meal_allowance) ? $employee->salaries->meal_allowance : null ),  ['class' => 'form-control']) !!}     
 
                         @if ($errors->has('meal_allowance'))
                         <span class="help-block">
@@ -449,7 +527,7 @@
                         {!! Form::label('transportation', 'Transportation Allowance:')  !!}
                         </label>
                            <div class="col-md-4">
-                        {!! Form::text('transportation', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('transportation', ( isset($employee->salaries->transportation) ? $employee->salaries->transportation : null ),  ['class' => 'form-control']) !!}     
 
                         @if ($errors->has('transportation'))
                         <span class="help-block">
@@ -465,7 +543,7 @@
                         {!! Form::label('basic_pay', 'Salary:')  !!}
                         </label>
                            <div class="col-md-4">
-                        {!! Form::text('basic_pay', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('basic_pay', ( isset($employee->salaries->basic_pay) ? $employee->salaries->basic_pay : null ),  ['class' => 'form-control']) !!}     
 
                         @if ($errors->has('basic_pay'))
                         <span class="help-block">
@@ -474,6 +552,7 @@
                         @endif
                         </div>
                         </div>
+                     
 
 
 

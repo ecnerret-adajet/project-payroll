@@ -178,6 +178,22 @@
     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}" type="text/javascript"></script>
     <script src="{{asset('plugins/input-mask/jquery.inputmask.extensions.js')}}" type="text/javascript"></script>
 
+      <script type="text/javascript">
+$(document).ready(function(){
+    $('input[type="radio"]').click(function(){
+        if($(this).attr("value")=="basicpay"){
+            $(".employee_type").not(".basicpay").hide();
+            $(".basicpay").show();
+        }
+        if($(this).attr("value")=="perquantity"){
+            $(".employee_type").not(".perquantity").hide();
+            $(".perquantity").show();
+        }
+      
+    });
+});
+</script>
+
         <script type="text/javascript">
       $(function () {
  
@@ -197,21 +213,7 @@ function myFunction() {
 </script>
 
 
-  <script type="text/javascript">
-$(document).ready(function(){
-    $('input[type="radio"]').click(function(){
-        if($(this).attr("value")=="basicpay"){
-            $(".employee_type").not(".basicpay").hide();
-            $(".basicpay").show();
-        }
-        if($(this).attr("value")=="perquantity"){
-            $(".employee_type").not(".perquantity").hide();
-            $(".perquantity").show();
-        }
-      
-    });
-});
-</script>
+
 
 
 

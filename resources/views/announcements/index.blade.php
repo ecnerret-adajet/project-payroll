@@ -14,6 +14,7 @@
                   <th>Title</th>
                   <th>Body</th>
                   <th>Publish Date</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
@@ -21,6 +22,7 @@
                <th>Title</th>
                   <th>Body</th>
                   <th>Publish Date</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -34,6 +36,15 @@
                   </td>
                   <td>
                  {{  date("d/m/Y", strtotime($announcement->publish_at))  }}
+                  </td>
+                  <td>
+
+          @permission('role-delete')
+      {!! Form::open(['method' => 'DELETE','route' => ['announcements.destroy', $announcement->id],'style'=>'display:inline']) !!}
+            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+          {!! Form::close() !!}
+          @endpermission
+
                   </td>
                 </tr>
               @endforeach

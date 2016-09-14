@@ -135,15 +135,26 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Employee $employee, User $user, Salary $salary)
     {
         $statuses = Status::lists('name','id');
         $basics = Basic::lists('position','id');
         $quantities = Quantity::lists('position','id');
         $roles = Role::lists('display_name','id');
+
+        $salaries = Salary::with('employees')->get();
+
+        $user = User::all();
+       
+
         return view('employees.edit', compact(
+            'user',
+            'roles',
+            'userRole',
             'basics',
             'quantities',
+            'salaries',
+            'salary',
             'roles',
             'statuses',
             'employee'));
@@ -158,6 +169,7 @@ class EmployeesController extends Controller
      */
     public function update(EmployeeRequest $request, Employee $employee)
     {
+
         $employee->update($request->all());
         $employee->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
         $employee->basics()->sync((!$request->input('basic_list') ? [] : $request->input('basic_list')));
@@ -175,7 +187,7 @@ class EmployeesController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,',
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
