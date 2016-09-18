@@ -71,7 +71,7 @@
       <th>Basic Pay</th>
       <td>
         @foreach($payroll->employees as $employee)
-             {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : $employee->salaries->basic_pay )}}
+          {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : 'PHP '.$employee->salaries->basic_pay.'.00' )}}
         @endforeach
       </td>
     </tr>
@@ -92,22 +92,16 @@
     </tr>
 
     <tr>
-      <th>Meal allowance</th>
+      <th>Allowance</th>
       <td>
         @foreach($payroll->employees as $employee)
-           PHP {{ $employee->salaries->meal_allowance }}.00
+         PHP {{$allowance = $employee->salaries->meal_allowance + $employee->salaries->transportation }}.00
         @endforeach   
+
       </td>
     </tr>
 
-      <tr>
-      <th>transportation</th>
-      <td>
-        @foreach($payroll->employees as $employee)
-           PHP {{ $employee->salaries->transportation }}.00
-        @endforeach   
-      </td>
-    </tr>
+     
 
           <tr>
       <th>Attendance</th>
@@ -132,10 +126,10 @@
       <td>
         @foreach($payroll->employees as $employee)
                   @foreach($employee->quantities as $quantity)
-                    {{($quantity->position == null ? 100 : 0)}}
+                   PHP {{($quantity->position == null ? 100 : 0)}}.00 
                   @endforeach
                   @foreach($employee->basics as $basic)
-                    {{$ssspay =  $basic->position != null ? 100 : 0}}
+                  PHP {{$ssspay =  $basic->position != null ? 100 : 0}}.00
                   @endforeach
         @endforeach   
       </td>
@@ -146,10 +140,10 @@
       <td>
           @foreach($payroll->employees as $employee)
                   @foreach($employee->quantities as $quantity)
-                    {{($quantity->position == null ? 100 : 0)}}
+                   PHP {{($quantity->position == null ? 100 : 0)}}.00
                   @endforeach
                 @foreach($employee->basics as $basic)
-                    {{$pagpay =  $basic->position != null ? 100 : 0}}
+                  PHP {{$pagpay =  $basic->position != null ? 100 : 0}}.00
                   @endforeach
         @endforeach   
       </td>

@@ -277,7 +277,7 @@
                         {!! Form::label('telephone', 'Telephone Number:')  !!}
                         </label>
                         <div class="col-md-4">
-                        {!! Form::number('telephone', null,  ['class' => 'form-control']) !!}     
+                        {!! Form::text('telephone', null,  ['class' => 'form-control', "data-inputmask" => "'mask': '9999-999'", 'data-mask']) !!}     
 
                         @if ($errors->has('telephone'))
                         <span class="help-block">
@@ -369,6 +369,7 @@
     @endif
     </div>
     </div>
+
     @endif
 
     @else
@@ -506,7 +507,7 @@
     </div>
 
     <hr/>
-        <div class="perquantity employee_type form-group{{ $errors->has('meal_allowance') ? ' has-error' : '' }}">
+        <div class="perquantity employee_type form-group{{ $errors->has('meal_allowance') ? ' has-error' : '' }}" style="display: none;">
                         <label class="col-md-4 control-label"> 
                         {!! Form::label('meal_allowance', 'Meal Allowance:')  !!}
                         </label>
@@ -522,7 +523,7 @@
                         </div>
 
 
-                        <div class="perquantity employee_type form-group{{ $errors->has('transportation') ? ' has-error' : '' }}">
+                        <div class="perquantity employee_type form-group{{ $errors->has('transportation') ? ' has-error' : '' }}" style="display: none;">
                         <label class="col-md-4 control-label"> 
                         {!! Form::label('transportation', 'Transportation Allowance:')  !!}
                         </label>

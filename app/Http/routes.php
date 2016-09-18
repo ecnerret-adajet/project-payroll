@@ -37,7 +37,7 @@ Route::get('/showpayslips', 'HomeController@showpayslips');
 
 
 Route::resource('perdays','PerdaysController');
-Route::resource('attendances','attendancesController');
+Route::resource('attendances','AttendancesController');
 
 Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);
 Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create','middleware' => ['permission:role-create']]);

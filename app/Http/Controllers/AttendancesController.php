@@ -38,7 +38,7 @@ class AttendancesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage.ss
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -49,7 +49,7 @@ class AttendancesController extends Controller
         $attendance = Attendance::create($request->all()); 
         $attendance->employees()->attach($request->input('employee_list'));
 
-        return redirect('attendances/create');
+        return redirect('logs');
     }
 
     /**
@@ -58,9 +58,10 @@ class AttendancesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Attendance $attendance)
     {
-        //
+        $employees = Employee::all();
+        return view('attendance.show', compact('attendance', 'employees'));
     }
 
     /**

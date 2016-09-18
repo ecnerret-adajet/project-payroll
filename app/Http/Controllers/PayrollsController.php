@@ -80,6 +80,7 @@ class PayrollsController extends Controller
         $total = 0;
         $ssspay = 0;
         $pagpay = 0;
+        $allowance = 0;
         $basics = Basic::all();
         $users = User::all();
         $quantities = Quantity::all();
@@ -101,6 +102,7 @@ class PayrollsController extends Controller
             'perdays',
             'salaries',
             'payrolls',
+            'allowance',
             'payroll'));
     }
 

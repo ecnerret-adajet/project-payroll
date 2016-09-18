@@ -111,6 +111,8 @@
            @else
             <li><a href="{{url('/employees/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i>My Information</a></li>
               <li><a href="{{url('/payrolls/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslip</a></li>
+
+            <li><a href="{{url('/attendances/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Time logs</a></li>
            @endif
 
 
