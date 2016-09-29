@@ -29,6 +29,7 @@
     <link href="{{ asset('/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('/css/responsive.bootstrap.min.css') }}" rel="stylesheet" />  
     <link href="{{ asset('/css/buttons.bootstrap.min.css') }}" rel="stylesheet" />  
+    <link href="https://raw.githubusercontent.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  
   
   
     <style>
@@ -96,7 +97,7 @@
             <li style="background-color: #95a5a6">
 
            
-              <img src="{{asset('/avatar/placeholder.png')}}" style="width:100px; height:auto; padding:10px; display: block; margin: auto;"  class="img-circle" alt="User Image" />
+              <img src="{{asset('/img/logo.png')}}" style="width:100px; height:auto; padding:10px; display: block; margin: auto;"  class="img-circle" alt="User Image" />
          
 
 
@@ -175,6 +176,12 @@
     <script src="{{ asset('js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+
+
+    <script src="https://raw.githubusercontent.com/moment/moment/develop/min/moment-with-locales.min.js"></script>
+    <script src="https://raw.githubusercontent.com/Eonasdan/bootstrap-datetimepicker/master/build/js/bootstrap-datetimepicker.min.js"></script>
+
+
 
       <!-- InputMask -->
     <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}" type="text/javascript"></script>
@@ -291,5 +298,14 @@ $('ul.nav a').filter(function() {
   $('.nav-tabs > .active').prev('li').find('a').trigger('click');
 });
     </script>
+
+       <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datepicker();
+            });
+        </script>
+
+
+        
   </body>
 </html>

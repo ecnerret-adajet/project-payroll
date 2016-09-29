@@ -34,8 +34,9 @@
                   <th>Basic Pay</th>
                   <th>SSS</th>
                   <th>Pag-ibig</th>
-                  <th>Attendace</th>
+                  <th>Attendance</th>
                   <th>Late</th>
+                  <th>Other Deductions</th>
                   <th>Subtotal</th>
                   <th>Net Gross</th>
                 </tr>
@@ -49,8 +50,9 @@
                   <th>Basic Pay</th>
                   <th>SSS</th>
                   <th>Pag-ibig</th>
-                  <th>Attendace</th>
+                  <th>Attendance</th>
                   <th>Late</th>
+                  <th>Other Deductions</th>
                   <th>Subtotal</th>
                   <th>Net Gross</th>
                 </tr>
@@ -81,6 +83,7 @@
                   <td>Pag-ibig</td>
                   <td></td>
                   <td>Late</td>
+                  <td>Other Deductions</td>
                   <td>Subtotal</td>
                   <td>Net Gross</td>
                 </tr>

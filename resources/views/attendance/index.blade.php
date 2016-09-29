@@ -46,9 +46,6 @@
                   {{$employee->first_name}} {{$employee->middle_name}} {{$employee->last_name}} 
                   @endforeach
 
-            
-
-
                   </td>
 
                   <td>
@@ -62,12 +59,6 @@
                        @else
                          <a href="" class="btn btn-danger btn-sm">TIME OUT</a>       {{  $attendance->time_in->format('Y-m-d h:i:s A')  }} 
                     @endif
-
-               
-                   
-             
-
-
         
                   </td>
 

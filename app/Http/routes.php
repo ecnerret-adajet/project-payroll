@@ -35,7 +35,6 @@ Route::resource('employees','EmployeesController');
 Route::resource('payrolls','PayrollsController');
 Route::get('/showpayslips', 'HomeController@showpayslips');
 
-
 Route::resource('perdays','PerdaysController');
 Route::resource('attendances','AttendancesController');
 

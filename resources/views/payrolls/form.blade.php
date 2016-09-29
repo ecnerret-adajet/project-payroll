@@ -44,6 +44,39 @@
                             </div>
                             </div>
 
+                        
+                        <div class="form-group {{ $errors->has('other_deductions') ? ' has-error' : '' }}">
+                         <label class="col-md-4 control-label"> 
+                         {!! Form::label('other_deductions', 'Other deductions:')  !!}
+                        </label>
+                        <div class="col-md-5">
+                            {!! Form::number('other_deductions', null, ['class' => 'form-control']) !!}      
+
+                             @if ($errors->has('other_deductions'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('other_deductions') }}</strong>
+                            </span>
+                            @endif   
+                         </div>
+                     </div>     
+
+                     <div class="form-group {{ $errors->has('remakrs') ? 'has-error' : '' }}">
+                     <label class="col-md-4 control-label">
+                       {!!   Form::label('remarks', 'Remarks') !!}
+                     </label>
+                     <div class="col-md-5">
+                        {!! Form::textarea('remarks', null, ['class' => 'form-control']) !!}
+
+                        @if($errors->has('remarks'))
+                        <span class="help-block">
+                          <strong>
+                            {{ $errors->first('remarks') }}
+                          </strong>
+                        </span>
+                        @endif
+                     </div>
+                     </div>
+
                    
 
                    

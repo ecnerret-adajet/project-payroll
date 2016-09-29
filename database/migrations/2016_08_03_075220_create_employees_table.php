@@ -43,6 +43,9 @@ class CreateEmployeesTable extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
         });
+
+        //then set autoincrement to 1000
+        DB::update("ALTER TABLE employees AUTO_INCREMENT = 1000;");
     }
 
     /**

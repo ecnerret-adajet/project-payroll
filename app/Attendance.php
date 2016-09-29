@@ -21,6 +21,11 @@ class Attendance extends Model
     	'break_out'
     ];
 
+    public function getOneDayAttribute()
+    {
+        return ucfirst($this->time_in->diffInHours($this->time_out));
+    }
+
 
     public function employees()
     {

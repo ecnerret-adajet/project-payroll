@@ -14,72 +14,72 @@
   </div>
   <div class="panel-body">
 
+
+
+
 <div class="row">
-<div class="col-md-6 print-style" >
-    
-<table class="table table-striped table-bordered table-hover ">
+<div class="col-md-12">
+  <table class="table table-striped table-bordered table-hover ">
 
   <tbody>
   <tr>
-      <th>Company Name</th>
-      <td>MRQK Incorporated</td>
-    </tr>
+  <td rowspan="2">
+<img class="img-responsive" src="{{asset('img/logo.png')}}" style="width:100px; height:auto; padding:10px; display: block; margin: auto;">
+  </td>
 
-      <tr>
-      <th>Employee Name</th>
-      <td>
-           @foreach($payroll->employees as $employee)
+  <td width="40%">
+   @foreach($payroll->employees as $employee)
           {{$employee->full_name}}
-        @endforeach        
-      </td>
-    </tr>
+        @endforeach   
+  </td>
 
-        <tr>
-      <th>Employee Status</th>
-      <td>
-           @foreach($payroll->employees as $employee)
-              @foreach($employee->statuses as $status)
-          {{$status->name}}
-              @endforeach
-        @endforeach        
-      </td>
-    </tr>
+  <td width="25%">
+  <strong> Period: </strong> {{  date('m/d/Y', strtotime($payroll->start_period))  }} - {{  date('m/d/Y', strtotime($payroll->end_period))  }} 
+  </td>
+  </tr>
 
-
-      <tr>
-      <th>Position</th>
-      <td>
-           @foreach($payroll->employees as $employee)
+  <tr>
+  <td>
+   @foreach($payroll->employees as $employee)
                @foreach($employee->basics as $basic)
                     {{$basic->position}}
                   @endforeach
                   @foreach($employee->quantities as $quantity)
                     {{$quantity->position}}
                   @endforeach
-        @endforeach        
-      </td>
-    </tr>
+        @endforeach      
+  </td>
 
-         <tr>
-      <th>Payroll Period</th>
-      <td>
-              {{ (date("d/m/Y", strtotime($payroll->start_period)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($payroll->start_period)) )  }} - {{ (date("d/m/Y", strtotime($payroll->end_period)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($payroll->end_period)) )  }}
-      </td>
-    </tr>
- 
-    <tr>
-      <th>Basic Pay</th>
-      <td>
-        @foreach($payroll->employees as $employee)
+   <td>
+      @foreach($payroll->employees as $employee)
+              @foreach($employee->statuses as $status)
+          {{$status->name}}
+              @endforeach
+        @endforeach  
+  </td>
+
+  </tr><!-- end table row -->
+
+  <tr>
+  <td colspan="2">
+Basic Pay
+  </td>
+
+  <td colspan="2">
+      @foreach($payroll->employees as $employee)
           {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : 'PHP '.$employee->salaries->basic_pay.'.00' )}}
         @endforeach
-      </td>
-    </tr>
+  </td>
 
-      <tr>
-      <th>Total Perday Quantity</th>
-      <td>
-      <span style="display:none ! important"> 
+  </tr>
+
+    <tr>
+  <td colspan="2">
+Total Perday Quantity
+  </td>
+
+  <td colspan="2">
+  <span style="display:none ! important"> 
          @foreach($payroll->employees as $employee)
                @foreach($employee->perdays as $perday)
                   {{ $sum += $perday->total_quantity }} 
@@ -88,43 +88,70 @@
         </span>
 
             {{$sum}} dozen
-      </td>
-    </tr>
+  </td>
+
+  </tr>
 
     <tr>
-      <th>Allowance</th>
-      <td>
-        @foreach($payroll->employees as $employee)
+  <td colspan="2">
+Allowance
+  </td>
+
+  <td colspan="2">
+      @foreach($payroll->employees as $employee)
          PHP {{$allowance = $employee->salaries->meal_allowance + $employee->salaries->transportation }}.00
         @endforeach   
+  </td>
 
-      </td>
-    </tr>
-
-     
-
-          <tr>
-      <th>Attendance</th>
-      <td>
-          <span style="display: none ! important"> 
-                  @foreach($payroll->employees as $employee)
-                        @foreach($employee->attendances as $attendance)
-                          {{$attendance->time_in}}
-                          {{$attendance->id}}
-                        @endforeach
-                  @endforeach
-                  </span>
-
-
-                       {{  $payroll->start_period->diffInDays($payroll->end_period).' Day(s)' }}
-      </td>
-    </tr>
+  </tr>
 
 
       <tr>
-      <th>SSS</th>
-      <td>
-        @foreach($payroll->employees as $employee)
+  <td colspan="2">
+Attendance
+  </td>
+
+  <td colspan="2">
+       <span style="display: none;"> 
+             @foreach($employee->attendances as $attendance)
+            {{    date('F d, Y h:i:s A', strtotime( $attendance->time_out))  }} timeout <br/>
+            {{    date('F d, Y h:i:s A', strtotime( $attendance->time_in))  }} timein <br/>
+
+
+            <br/>
+             @endforeach
+          </span>
+
+        {{ $attendance->time_in->diffInDays($attendance->time_out) }} day
+
+
+
+  </td>
+
+  </tr>
+
+
+
+
+        <tr>
+  <td colspan="2">
+Other Deductions
+  </td>
+
+  <td colspan="2">
+    PHP {{$payroll->other_deductions}}.00 (Remarks: {{ $payroll->remarks }})
+  </td>
+
+  </tr>
+
+
+          <tr>
+  <td colspan="2">
+SSS
+  </td>
+
+  <td colspan="2">
+     @foreach($payroll->employees as $employee)
                   @foreach($employee->quantities as $quantity)
                    PHP {{($quantity->position == null ? 100 : 0)}}.00 
                   @endforeach
@@ -132,29 +159,35 @@
                   PHP {{$ssspay =  $basic->position != null ? 100 : 0}}.00
                   @endforeach
         @endforeach   
-      </td>
-    </tr>
+  </td>
 
-          <tr>
-      <th>Pagibig</th>
-      <td>
-          @foreach($payroll->employees as $employee)
+  </tr>
+
+      <tr>
+  <td colspan="2">
+Pagibig
+  </td>
+
+  <td colspan="2">
+       @foreach($payroll->employees as $employee)
                   @foreach($employee->quantities as $quantity)
                    PHP {{($quantity->position == null ? 100 : 0)}}.00
                   @endforeach
                 @foreach($employee->basics as $basic)
                   PHP {{$pagpay =  $basic->position != null ? 100 : 0}}.00
                   @endforeach
-        @endforeach   
-      </td>
-    </tr>
+        @endforeach    
+  </td>
 
-         <tr>
-      <th>Gross Net</th>
-      <td>
+  </tr>
 
-     
-      
+        <tr>
+  <td colspan="2" class="danger">
+<strong>Gross Net</strong>
+  </td>
+
+  <td colspan="2" class="danger">
+        
        @foreach($payroll->employees as $employee)
           <span style="display: none ! important;">
                   @foreach($employee->quantities as $quantity)
@@ -162,35 +195,21 @@
                   @endforeach
         </span>
 
-        PHP {{$total += $employee->salaries->basic_pay + $employee->salaries->meal_allowance +  $employee->salaries->transportation - $ssspay - $pagpay}}.00
+        PHP {{$total += $employee->salaries->basic_pay + $employee->salaries->meal_allowance +  $employee->salaries->transportation - $payroll->other_deductions - $ssspay - $pagpay}}.00
 
 
         @endforeach
 
+  </td>
 
-       
-  
-        
-       
-      </td>
-    </tr>
+  </tr>
 
-     
- 
+
 
   </tbody>
-</table> 
-  
 
-
-
-
+</table>
 </div>
-
-
-
-
-
 </div>
 
 <div class="row">

@@ -167,13 +167,11 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeRequest $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee, User $id)
     {
 
         $employee->update($request->all());
-        $employee->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
-        $employee->basics()->sync((!$request->input('basic_list') ? [] : $request->input('basic_list')));
-        $employee->quantities()->sync((!$request->input('quantity_list') ? [] : $request->input('quantity_list')));
+ 
 
 
         if($request->hasFile('avatar')){
@@ -185,9 +183,9 @@ class EmployeesController extends Controller
         }
 
 
-        $this->validate($request, [
+    $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,',
+            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
@@ -207,6 +205,7 @@ class EmployeesController extends Controller
         foreach ($request->input('roles') as $key => $value) {
             $user->attachRole($value);
         }
+
 
 
         return redirect('employees');

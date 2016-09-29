@@ -60,6 +60,7 @@ class PayrollsController extends Controller
      */
     public function store(PayrollRequest $request)
     {
+   
         $payroll = Auth::user()->payrolls()->create($request->all()); 
         $payroll->employees()->attach($request->input('employee_list'));
 
@@ -72,25 +73,21 @@ class PayrollsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Payroll $payroll)
+    public function show(Payroll $payroll, Attendance $attendance)
     {
-        $payrolls = Payroll::all();
         $sum = 0;
         $gross = 0;
         $total = 0;
         $ssspay = 0;
         $pagpay = 0;
         $allowance = 0;
-        $basics = Basic::all();
-        $users = User::all();
-        $quantities = Quantity::all();
-        $perdays = Perday::all();
-        $employees = Employee::all();
-        $attendances = attendance::with('employees');
-        $salaries = Salary::all(); 
+
+
         return view('payrolls.show',compact(
             'employees',
             'attendances',
+            'attendance',
+            'attendancesx',
             'users',
             'quantities',
             'sum',
@@ -106,6 +103,8 @@ class PayrollsController extends Controller
             'payroll'));
     }
 
+
+   
     /**
      * Show the form for editing the specified resource.
      *

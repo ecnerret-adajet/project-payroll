@@ -12,6 +12,8 @@ class Payroll extends Model
     	'start_period',
         'end_period',
         'dozen',
+        'other_deductions',
+        'remarks',
         'gross_net'
     ];
 

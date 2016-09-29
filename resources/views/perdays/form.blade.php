@@ -19,7 +19,7 @@
     {!! Form::label('total_quantity', 'Total Quantity:')  !!}
     </label>
     <div class="col-md-4">
-    {!! Form::text('total_quantity', null,  ['class' => 'form-control']) !!}     
+    {!! Form::number('total_quantity', null,  ['class' => 'form-control']) !!}     
 
     @if ($errors->has('total_quantity'))
     <span class="help-block">

@@ -12,14 +12,18 @@
   </div>
   <div class="panel-body">
 
-
+      @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+      <p>{{ $message }}</p>
+    </div>
+  @endif
 
 
       <div class="form-group">
 <div class="col-md-6">
  <div class="radio">
           <label style="font-size: 15px; margin-left: 45px;">
-            <input style="height:20px; width:20px;" type="radio" name="optionsRadios" id="optionsRadios1" value="basicpay" checked="">
+            <input style="height:20px; width:20px;" type="radio" name="optionsRadios" id="optionsRadios1" value="perquantity" checked="">
             TIME IN
           </label>
         </div>
@@ -29,7 +33,7 @@
        
         <div class="radio">
           <label style="font-size: 15px;">
-            <input style="height:20px; width:20px;" type="radio" name="optionsRadios" id="optionsRadios2" value="perquantity">
+            <input style="height:20px; width:20px;" type="radio" name="optionsRadios" id="optionsRadios2" value="basicpay">
            TIME OUT
           </label>
         </div>
@@ -57,12 +61,22 @@
     </div>
     </div>
 
-    <div class="basicpay employee_type  form-group{{ $errors->has('time_in') ? ' has-error' : '' }}">
+    <div class="perquantity employee_type  form-group{{ $errors->has('time_in') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
     {!! Form::label('time-in', 'Time In:')  !!}
     </label>
     <div class="col-md-8">
-     {!! Form::input('date', 'time_in',  $attendance->time_in, ['class' => 'form-control']) !!}     
+       
+
+ <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                     {!! Form::input('date', 'time_in',  $attendance->time_in, ['class' => 'form-control', 'id' => 'datetimepicker1']) !!}  
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+
 
     @if ($errors->has('time-in'))
     <span class="help-block">
@@ -72,7 +86,7 @@
     </div>
     </div>
 
-       <div style="display:none" class="perquantity employee_type  form-group{{ $errors->has('time_out') ? ' has-error' : '' }}">
+       <div style="display:none" class="basicpay  employee_type  form-group{{ $errors->has('time_out') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
     {!! Form::label('time_out', 'Time Out:')  !!}
     </label>

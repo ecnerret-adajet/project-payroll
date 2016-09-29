@@ -38,6 +38,7 @@ class HomeController extends Controller
             $users = User::all();
             $roles = Role::all();
 
+
         return view('home', compact('employees',
                 'statuses',
                 'users',
@@ -52,7 +53,7 @@ class HomeController extends Controller
 
 
     public function logs(){
-        $employees = Employee::lists('id','id');
+        $employees = Employee::lists('MRQK00'+'id','id');
         return view('logs', compact('employees'));
     }
 

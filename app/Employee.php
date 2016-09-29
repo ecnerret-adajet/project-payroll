@@ -24,7 +24,8 @@ class Employee extends Model
         'pagibig_no',
         'sss_no',
         'avatar',
-        'salary_type'
+        'salary_type',
+        'emp_id'
     ];
 
     protected $dates = [

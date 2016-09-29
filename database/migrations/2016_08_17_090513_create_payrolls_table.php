@@ -29,6 +29,9 @@ class CreatePayrollsTable extends Migration
             $table->timestamps();
         });
 
+          //then set autoincrement to 1000
+        DB::update("ALTER TABLE payrolls AUTO_INCREMENT = 1000;");
+
 
         Schema::create('employee_payroll', function (Blueprint $table){
             $table->integer('employee_id')->unsigned()->index();

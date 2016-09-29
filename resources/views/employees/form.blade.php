@@ -8,6 +8,7 @@
 
 <div id="myTabContent" class="tab-content">
 
+
 <div class="tab-pane fade active in" id="account">
     <p style="padding-bottom: 10px;">
 
@@ -207,24 +208,8 @@
                         </div>
                         </div>
 
-                          <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label"> 
-                        {!! Form::label('address', 'Permanent Address:')  !!}
-                        </label>
-                        <div class="col-md-4">
-                        {!! Form::textarea('address', null,  ['class' => 'form-control']) !!}     
 
-                        @if ($errors->has('address'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('address') }}</strong>
-                        </span>
-                        @endif
-                        </div>
-                        </div>
-
-
-
-                             <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label"> 
                         {!! Form::label('gender', 'Gender:')  !!}
                         </label>
@@ -242,6 +227,25 @@
                         @endif
                         </div>
                         </div>
+
+                          <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label"> 
+                        {!! Form::label('address', 'Permanent Address:')  !!}
+                        </label>
+                        <div class="col-md-4">
+                        {!! Form::textarea('address', null,  ['class' => 'form-control']) !!}     
+
+                        @if ($errors->has('address'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('address') }}</strong>
+                        </span>
+                        @endif
+                        </div>
+                        </div>
+
+
+
+                 
 
 
                    <div class="row">
@@ -308,12 +312,13 @@
     <div class="tab-pane fade" id="job">
     <p style="padding-bottom: 10px">
 
+
     <div class="form-group{{ $errors->has('status_list') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
     {!! Form::label('status_list', 'Employee Status:')  !!} 
     </label>
     <div class="col-md-4">
-    {!! Form::select('status_list', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee Status --']) !!}
+    {!! Form::select('status_list[]', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee Status --']) !!}
 
     @if ($errors->has('status_list'))
     <span class="help-block">
@@ -357,7 +362,7 @@
     <div class="col-md-4">
 
     @if(Request::path()== 'employees/create')
-    {!! Form::select('basic_list', ['' => '--- Select position ---'] + $basics, null,  ['class' => 'form-control']) !!}
+    {!! Form::select('basic_list[]', ['' => '--- Select position ---'] + $basics, null,  ['class' => 'form-control']) !!}
     @else
     {!! Form::select('basic_list',  $basics, null,  ['class' => 'form-control','placeholder' => '--- Select Position ---']) !!}
     @endif     
@@ -382,7 +387,7 @@
     @if(Request::path()== 'employees/create')
     {!! Form::select('basic_list', ['' => '--- Select position ---'] + $basics, null,  ['class' => 'form-control']) !!}
     @else
-    {!! Form::select('basic_list',  $basics, null,  ['class' => 'form-control','placeholder' => '--- Select Position ---']) !!}
+    {!! Form::select('basic_list[]',  $basics, null,  ['class' => 'form-control','placeholder' => '--- Select Position ---']) !!}
     @endif     
 
     @if ($errors->has('basic_list'))
@@ -410,7 +415,7 @@
     @if(Request::path()== 'employees/create')
     {!! Form::select('quantity_list', ['' => '--- Select position ---'] + $quantities, null,  ['class' => 'form-control']) !!}   
     @else
-     {!! Form::select('quantity_list', $quantities, null,  ['class' => 'form-control','placeholder' => '--- Select position ---']) !!}  
+     {!! Form::select('quantity_list[]', $quantities, null,  ['class' => 'form-control','placeholder' => '--- Select position ---']) !!}  
     @endif  
 
     @if ($errors->has('quantity_list'))
@@ -424,7 +429,7 @@
 
     @else
 
-       <div class="perquantity employee_type form-group{{ $errors->has('quantity_list') ? ' has-error' : '' }}">
+       <div class="perquantity employee_type form-group{{ $errors->has('quantity_list') ? ' has-error' : '' }}"  style="display: none;">
     <label class="col-md-4 control-label"> 
     {!! Form::label('quantity_list', 'Position:')  !!}
     </label>
@@ -432,7 +437,7 @@
     @if(Request::path()== 'employees/create')
     {!! Form::select('quantity_list', ['' => '--- Select position ---'] + $quantities, null,  ['class' => 'form-control']) !!}   
     @else
-     {!! Form::select('quantity_list', $quantities, null,  ['class' => 'form-control','placeholder' => '--- Select position ---']) !!}  
+     {!! Form::select('quantity_list[]', $quantities, null,  ['class' => 'form-control','placeholder' => '--- Select position ---']) !!}  
     @endif  
 
     @if ($errors->has('quantity_list'))
