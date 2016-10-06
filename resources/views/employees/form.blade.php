@@ -364,6 +364,7 @@
       </div>
     </div>
     @endif
+    
 
 <!--- basic pay method -->
     @if(Request::path()== 'employees/'.$employee->id.'/edit')
