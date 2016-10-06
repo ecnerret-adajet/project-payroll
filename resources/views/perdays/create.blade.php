@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-<ul class="breadcrumb" style="margin-top: 50px;">
+<div class="row">
+<h1 class="page-header">Create Record</h1>
+<ul class="breadcrumb">
   <li><a href="#">Dashboard</a></li>
   <li><a href="#">Per Quantity</a></li>
   <li><a href="#">Create Record</a></li>
@@ -16,7 +18,7 @@
 
 
         {!! Form::model($perday = new \App\Perday,  ['class' => 'form-horizontal',  'url' => 'perdays',  'files' => 'true', 'enctype'=>'multipart/form-data', 'novalidate' => 'novalidate', 'id' => 'perdaysForm'])!!}
-  		  {!! csrf_field() !!}
+        {!! csrf_field() !!}
                     
         
                     
@@ -29,12 +31,16 @@
 
 
 
-		{!! Form::close() !!}
+    {!! Form::close() !!}
    
 
 
   </div>
 </div>
+
+
+
+</div><!-- end row -->
 
 
 @endsection

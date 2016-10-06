@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
+<div class="row">
 
-<ul class="breadcrumb" style="margin-top: 50px;">
+ <h1 class="page-header">My Information</h1>
+<ul class="breadcrumb">
   <li><a href="#">Dashboard</a></li>
   <li><a href="#">Payslip</a></li>
   <li><a href="#">Show</a></li>
@@ -117,6 +119,8 @@
 
 
 
+
+</div>
 
 
 

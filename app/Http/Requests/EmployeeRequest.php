@@ -33,7 +33,6 @@ class EmployeeRequest extends Request
              'address' => 'required',
              'date_hired' => 'required',
              'pagibig_no' => 'required',
-             'salary_type' => 'required',
              'status_list' => 'required',
         ];
     }

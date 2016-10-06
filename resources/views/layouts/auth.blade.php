@@ -87,7 +87,7 @@ tt=display_c();
     <!-- select2 plugin -->
     <script>
       $(".select2").select2({
-       placeholder: "Select an employee time in",
+       placeholder: "Select an Employee Id",
        allowClear: true
         });
     </script>

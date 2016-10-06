@@ -150,6 +150,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        MercurySeries\Flashy\FlashyServiceProvider::class,
+        Whossun\Toastr\ToastrServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -208,6 +211,9 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Flash'     => Laracasts\Flash\Flash::class,
+        'Flashy'    => MercurySeries\Flashy\Flashy::class,
+        'Toastr'  => Whossun\Toastr\Facades\Toastr::class,
 
     ],
 

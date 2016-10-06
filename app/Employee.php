@@ -41,16 +41,28 @@ class Employee extends Model
     /* list user table */
 
 
+    public function setBirthdateAttribute($date)
+    {
+        $this->attributes['birthdate'] = Carbon::parse($date);
+    }
+    
     public function getBirthdateAttribute($date)
     {
-         return Carbon::parse($date)->format('m/d/Y');
+        return new Carbon($date);
     }
 
-     public function getDateHiredAttribute($date)
+    public function setDateHiredAttribute($date)
     {
-         return Carbon::parse($date)->format('m/d/Y');
+        $this->attributes['date_hired'] = Carbon::parse($date);
+    }
+    
+    public function getDateHiredAttribute($date)
+    {
+        return new Carbon($date);
     }
 
+
+/* end date revision */
 
 
     public function user()
@@ -140,6 +152,17 @@ class Employee extends Model
     public function getTimeOutAttribute()
     {
         return $this->timeouts->lists('id')->all();
+    }
+
+
+    public function conditions()
+    {
+        return $this->belongsToMany('App\Condition')->withTimestamps();
+    }
+
+    public function getConditionListAttribute()
+    {
+        return $this->conditions->lists('id')->all();
     }
 
 

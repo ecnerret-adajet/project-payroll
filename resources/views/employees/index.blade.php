@@ -2,13 +2,26 @@
 
 @section('content')
 
- <h1 class="page-header">All Employee 
-<a href="{{url('/employees/create')}}" class="btn pull-right btn-primary btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Employee</a>
- </h1>
+ <div class="row">
 
-  <table id="emp-data" class="dt-responsive table-bordered nowrap display table-responsive table-hover table table-responsive">
+<h1 class="page-header">All Employees</h1>
+<ul class="breadcrumb">
+  <li><a href="{{url('home')}}">Dashboard</a></li>
+  <li class="active"><a href="{{url('employees')}}">Employees</a></li>
+</ul>
+
+
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Employees 
+    <a href="{{url('/employees/create')}}" class="btn btn-info"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Employee</a>
+    </h3>
+  </div>
+  <div class="panel-body">
+   
+      <table id="emp-data" class="dt-responsive table-bordered nowrap display table-responsive table-hover table table-responsive" width="100%">
               <thead>
-                <tr class="info">
+                <tr >
                   <th></th>
                   <th>Employee Id</th>
                   <th>Full Name</th>
@@ -16,12 +29,12 @@
                   <th>Status</th>
                     <th>Age</th>
                   <th>Date Hired</th>
-                  <th>Salary</th>
+                  <th>Employee type</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
-                <tr class="info">
+                <tr>
                   <th></th>
                   <th>Employee Id</th>
                   <th>Full Name</th>
@@ -29,7 +42,7 @@
                   <th>Status</th>
                   <th>Age</th>
                   <th>Date Hired</th>
-                   <th>Salary</th>
+                   <th>Employee type</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -65,17 +78,33 @@
                       {{ (date("d/m/Y", strtotime($employee->date_hired)) == '01/01/1970' ? 'N/A' : date("d/m/Y", strtotime($employee->date_hired)) )  }}
                   </td>
                   <td>
-                    {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : $employee->salaries->basic_pay )}}
+                      @foreach($employee->conditions as $condition)
+                      {{ $condition->name }}
+                      @endforeach
+
                   </td>
                   <td>
-                  <a class="bootstrap-modal-form-open btn btn-primary" data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="" style="padding-right: 10px;">
-                  <i class="fa fa-eye" aria-hidden="true"></i> View
-                  </a>
+        
+
+                  <div class="btn-group">
+  <a href="#" class="btn btn-primary">Actions</a>
+  <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a data-toggle="modal" data-target=".bs-edit{{$employee->id}}-modal-lg" href="">View Details</a></li>
+    <li><a href="{{url('employees/'.$employee->id.'/edit')}}">Update Status</a></li>
+   
+  </ul>
+</div>
                   </td>
                 </tr>
               @endforeach
               </tbody>
             </table>
+
+
+  </div>
+</div>
+
 
 
 
@@ -254,7 +283,6 @@
 
       </div><!-- end modal body -->
       <div class="modal-footer">
-        <a  class="btn btn-primary pull-left" href="{{url('employees/'.$employee->id.'/edit')}}"><i class="fa fa"></i> Modify</a>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           
                
@@ -266,6 +294,9 @@
        @endforeach
 <!-- end show data for trucks and customer -->
 
+
+
+ </div><!-- end row -->
 
 
 @endsection

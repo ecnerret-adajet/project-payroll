@@ -2,24 +2,37 @@
  
 @section('content')
 
-
- <h1 class="page-header">Edit New User</h1>
-
+<div class="row">
 
 
-	@if (count($errors) > 0)
-		<div class="alert alert-danger">
-			<strong>Whoops!</strong> There were some problems with your input.<br><br>
-			<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-			</ul>
-		</div>
-	@endif
-	{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12">
+ <h1 class="page-header">Edit User</h1>
+ <ul class="breadcrumb">
+  <li><a href="{{url('home')}}">Dashboard</a></li>
+  <li><a href="{{url('users')}}">Users</a></li>
+  <li class="active"><a href="{{url('users/'.$user->id.'/edit')}}">Edit user</a></li>
+</ul>
+
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit User</h3>
+  </div>
+  <div class="panel-body">
+ 
+    {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
                 {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
@@ -54,7 +67,7 @@
 
 
 
-	</div>
+    </div>
 
 
       <div class="row">
@@ -65,5 +78,16 @@
                    {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-right'])  !!}
                     </div>
                    </div> 
-	{!! Form::close() !!}
+    {!! Form::close() !!}
+
+  </div>
+</div>
+
+
+
+
+</div>
+
+
+
 @endsection

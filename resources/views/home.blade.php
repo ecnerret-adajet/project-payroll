@@ -3,7 +3,8 @@
 @section('content')
 
 
-        <h1 class="page-header">Dashboard</h1>
+
+
 
          @if(Auth::user()->hasRole('Administrator'))
          @else
@@ -15,79 +16,131 @@
           @endif
 
         @permission('role-create')
+
           <div class="row" >
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion-ios-people"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Total Employee</span>
-                  <span class="info-box-number">{{$employees->count()}}</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion-ios-star"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Total Regular</span>
-                  <span class="info-box-number">
-                    @foreach($status->slice(0,1) as $statuss)
-                          {{ $statuss->employees->count() }}
-                      @endforeach
-                  </span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion-ios-star-half"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Probationary</span>
-                  <span class="info-box-number">
-                        @foreach($status->slice(1,1) as $statuss)
-                          {{ $statuss->employees->count() }}
-                      @endforeach
-                  </span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion-ios-locked-outline"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Total Admin</span>
-                  <span class="info-box-number">
-                      @foreach($users->slice(0,1) as $user)
-                          {{ $user->roles->count() }}
-                      @endforeach
-                 
-                  </span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-          @endpermission
-        
-          <h3 class="sub-header">Latest Announcement</h3>
-          <div class="row">
+<div class="row">
+          <div class="col-md-12">
+
+          <h1 class="page-header">Dashboard 
+
+
+ </h1>
+
+
+
+      <ul class="breadcrumb">
+  <li class="active">Home</li>
+</ul>
+
+</div>
+
+</div><!-- end row -->
+
+    <div class="row">
           <div class="col-md-12">
 
           @foreach($announcements as $announcement)
-         <div class="alert alert-dismissible alert-success">
+         <div class="alert alert-dismissible alert-info">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <strong>{{$announcement->title}}</strong> - {{$announcement->body}}.
 </div>
           @endforeach
           </div>
-          </div>
+          </div><!-- end announcement -->
 
+<div class="row">
 
-          @permission('role-create')
-          <h3 class="sub-header">Daily Time Records</h3>
+ 
+              <!-- Info Boxes Style 2 -->
+              <div class="col-md-3">
+              <div class="info-box bg-aqua">
+                <span class="info-box-icon"><i class="ion-ios-people"></i></span>
+                <div class="info-box-content bg-aqua">
+                  <span class="info-box-text">Total Employee</span>
+                  <span class="info-box-number">{{$employees->count()}}</span>
+                   <div class="progress">
+                    <div class="progress-bar" style="width: 50%"></div>
+                  </div>
+                  <span class="progress-description">
+                 
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+              </div><!-- end cold-md-4 -->
 
-            <table id="table-data" class=" dt-responsive nowrap display table-responsive table-hover table table-responsive">
+                 <div class="col-md-3">
+              <div class="info-box bg-aqua">
+                <span class="info-box-icon"><i class="ion-ios-star-half"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Probationary</span>
+                  <span class="info-box-number">
+                       @foreach($status->slice(1,1) as $statuss)
+                          {{ $statuss->employees->count() }}
+                      @endforeach
+                  </span>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 20%"></div>
+                  </div>
+                  <span class="progress-description">
+                   
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+              </div>
+
+                 <div class="col-md-3">
+              <div class="info-box bg-aqua">
+                <span class="info-box-icon"><i class="ion-ios-star"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Regular Employee</span>
+                  <span class="info-box-number">
+                     @foreach($status->slice(0,1) as $statuss)
+                          {{ $statuss->employees->count() }}
+                      @endforeach
+                  </span>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                  </div>
+                  <span class="progress-description">
+                    
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+              </div>
+
+                 <div class="col-md-3">
+              <div class="info-box bg-aqua">
+                <span class="info-box-icon"><i class="ion-ios-locked-outline"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Administrators</span>
+                  <span class="info-box-number">
+                      @foreach($users->slice(0,1) as $user)
+                          {{ $user->roles->count() }}
+                      @endforeach
+                  </span>
+                  <div class="progress">
+                    <div class="progress-bar" style="width: 40%"></div>
+                  </div>
+                  <span class="progress-description">
+            
+                  </span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+              </div>
+             
+
+            <div class="col-md-12">
+
+            <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-user-plus" aria-hidden="true"></i> Present Employee</h3>
+  </div>
+  <div class="panel-body">
+     @role('Administrator')
+     
+            <table id="table-data" class=" dt-responsive table-bordered nowrap display table-responsive table-hover table table-responsive">
               <thead>
-                <tr class="info">
+                <tr>
                   <th></th>
                      <th>Full Name</th>
                   <th>Position</th>
@@ -97,7 +150,7 @@
                 </tr>
               </thead>
               <tfoot>
-                <tr class="info">
+                <tr>
                     <th></th>
                   <th>Full Name</th>
                   <th>Position</th>
@@ -144,8 +197,25 @@
               @endforeach
               </tbody>
             </table>
-            @endpermission
+            @endrole
 
+  </div>
+</div>
+            </div>
+
+         
+
+         </div>
+
+
+           
+          @endpermission
+        
+     
+      
+
+
+         
 
 
 

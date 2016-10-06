@@ -12,9 +12,9 @@ class BasicsTableSeeder extends Seeder
     public function run()
     {
           DB::table('basics')->insert([
-          array('position'=>'Reviser', 'salary' => '2724' ),
-          array('position'=>'Clothing Packer', 'salary' => '2724'),
-          array('position'=>'Driver', 'salary' => '2724' )
+          array('position'=>'Reviser', 'salary' => '0' ),
+          array('position'=>'Clothing Packer', 'salary' => '0'),
+          array('position'=>'Driver', 'salary' => '0' )
         ]);
     }
 }

@@ -14,11 +14,13 @@ class Payroll extends Model
         'dozen',
         'other_deductions',
         'remarks',
+        'payroll_date',
         'gross_net'
     ];
 
     protected $dates = [
         'start_period',
+        'payroll_date',
         'end_period'
     ];
 
@@ -52,6 +54,16 @@ class Payroll extends Model
         return new Carbon($date);
     }
 
+    public function setPayrollDateAttribute($date)
+    {
+        $this->attributes['payroll_date'] = Carbon::parse($date);
+    }
+    
+    public function getPayrollDateAttribute($date)
+    {
+        return new Carbon($date);
+    }
+
 
     /* list employees */
 
@@ -73,6 +85,11 @@ class Payroll extends Model
     public function attendances()
     {
         return $this->hasManyThrough('App\Attendance', 'App\Employee');
+    }
+
+    public function perdays()
+    {
+        return $this->hasManyThrough('App\Perdays', 'App\Employee');
     }
 
 

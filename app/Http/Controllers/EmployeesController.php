@@ -19,6 +19,8 @@ use App\Role;
 use App\Salary;
 use DB;
 use Hash;
+use Flashy;
+use App\Condition;
 
 
 class EmployeesController extends Controller
@@ -60,9 +62,10 @@ class EmployeesController extends Controller
         $employees = Employee::all();
         $statuses = Status::lists('name','id');
          $basics = Basic::lists('position','id')->all();
+         $conditions = Condition::lists('name','id')->all();
         $quantities = Quantity::lists('position','id')->all();
          $roles = Role::lists('display_name','id');
-        return view('employees.create', compact('statuses','basics','quantities','employees','roles'));
+        return view('employees.create', compact('statuses','basics','quantities','employees','roles','conditions'));
     }
 
     /**
@@ -93,6 +96,7 @@ class EmployeesController extends Controller
         $employee->salaries()->create($request->all());
         $employee->statuses()->attach($request->input('status_list'));
         $employee->basics()->attach((!$request->input('basic_list') ? [] : $request->input('basic_list')));
+        $employee->conditions()->attach((!$request->input('condition_list') ? [] : $request->input('condition_list')));
         $employee->quantities()->attach((!$request->input('quantity_list') ? [] : $request->input('quantity_list')));
 
         if($request->hasFile('avatar')){
@@ -141,6 +145,7 @@ class EmployeesController extends Controller
         $basics = Basic::lists('position','id');
         $quantities = Quantity::lists('position','id');
         $roles = Role::lists('display_name','id');
+        $conditions = Condition::lists('name','id');
 
         $salaries = Salary::with('employees')->get();
 
@@ -149,6 +154,7 @@ class EmployeesController extends Controller
 
         return view('employees.edit', compact(
             'user',
+            'conditions',
             'roles',
             'userRole',
             'basics',
@@ -167,11 +173,12 @@ class EmployeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeRequest $request, Employee $employee, User $id)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
 
         $employee->update($request->all());
- 
+          $employee->statuses()->sync((!$request->input('status_list') ? [] : $request->input('status_list')));
+          $employee->conditions()->sync((!$request->input('condition_list') ? [] : $request->input('condition_list')));
 
 
         if($request->hasFile('avatar')){
@@ -182,31 +189,7 @@ class EmployeesController extends Controller
             $employee->save();
         }
 
-
-    $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
-        ]);
-
-        $input = $request->all();
-        if(!empty($input['password'])){ 
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = array_except($input,array('password'));    
-        }
-
-        $user = User::find($id);
-        $user->update($input);
-        DB::table('role_user')->where('user_id',$id)->delete();
-
-        
-        foreach ($request->input('roles') as $key => $value) {
-            $user->attachRole($value);
-        }
-
-
+        flashy()->success('Employee successfully updated!');
 
         return redirect('employees');
     }

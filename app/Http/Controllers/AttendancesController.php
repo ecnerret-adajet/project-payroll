@@ -50,7 +50,7 @@ class AttendancesController extends Controller
         $attendance->employees()->attach($request->input('employee_list'));
 
         return redirect('logs')
-             ->with('success','successfully updated');
+             ->with('success','Successfully Logged!');
     }
 
     /**

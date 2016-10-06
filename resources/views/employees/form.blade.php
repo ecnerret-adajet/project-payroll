@@ -94,7 +94,7 @@
 
                            <div class="row">
                     <div class="col-md-12">
-                    <a class="pull-right btnNext btn btn-primary btn-sm" >Next</a>
+                    <a class="pull-right btnNext btn btn-primary" >Next</a>
                     </div>
                    </div>  
 
@@ -168,7 +168,7 @@
                          {!! Form::label('birthdate', 'Birthdate:')  !!}
                         </label>
                         <div class="col-md-4">
-                            {!! Form::input('date', 'birthdate', date($employee->birthdate), ['class' => 'form-control']) !!}         
+                            {!! Form::input('date', 'birthdate', date($employee->birthdate), ['class' => 'form-control', 'id' => 'bday', 'max' => '1998-01-01']) !!}         
                          </div>
                          </div>
 
@@ -250,7 +250,7 @@
 
                    <div class="row">
                     <div class="col-md-12">
-                    <a class="pull-right btnNext btn btn-primary btn-sm" >Next</a>
+                    <a class="pull-right btnNext btn btn-primary" >Next</a>
                     </div>
                    </div>     
 
@@ -297,11 +297,11 @@
 
                           <div class="row">
                     <div class="col-md-4">
-                     <a class="pull-left btnPrevious btn btn-default btn-sm" >Previous</a>
+                     <a class="pull-left btnPrevious btn btn-default" >Previous</a>
                     </div>
 
-                    <div class="col-md-4">
-                 <a class="pull-right btnNext btn btn-primary btn-sm" >Next</a>
+                    <div class="col-md-8">
+                 <a class="pull-right btnNext btn btn-primary pull-right" >Next</a>
                     </div>
                    </div> 
 
@@ -312,13 +312,28 @@
     <div class="tab-pane fade" id="job">
     <p style="padding-bottom: 10px">
 
+     <div class="form-group{{ $errors->has('condition_type') ? ' has-error' : '' }}">
+    <label class="col-md-4 control-label"> 
+    {!! Form::label('condition_type', 'Employee Status:')  !!} 
+    </label>
+    <div class="col-md-4">
+    {!! Form::select('condition_type[]', $conditions, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee status --']) !!}
+
+    @if ($errors->has('condition_type'))
+    <span class="help-block">
+    <strong>{{ $errors->first('condition_type') }}</strong>
+    </span>
+    @endif
+    </div>
+    </div>
+
 
     <div class="form-group{{ $errors->has('status_list') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
-    {!! Form::label('status_list', 'Employee Status:')  !!} 
+    {!! Form::label('status_list', 'Employee Type:')  !!} 
     </label>
     <div class="col-md-4">
-    {!! Form::select('status_list[]', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee Status --']) !!}
+    {!! Form::select('status_list[]', $statuses, null, ['class' => 'form-control', 'placeholder' => '-- Select Employee type --']) !!}
 
     @if ($errors->has('status_list'))
     <span class="help-block">
@@ -332,7 +347,7 @@
 
       @else
     <div class="form-group">
-      <label class="col-lg-4 control-label">Employee Type</label>
+      <label class="col-lg-4 control-label">Salary Type</label>
       <div class="col-lg-6">
         <div class="radio">
           <label>
@@ -458,7 +473,7 @@
      {!! Form::label('date_hired', 'Date hired:')  !!}
     </label>
     <div class="col-md-4">
-        {!! Form::input('date', 'date_hired', $employee->date_hired, ['class' => 'form-control']) !!}         
+        {!! Form::input('date', 'date_hired', $employee->date_hired, ['class' => 'form-control', 'id' => 'datefield']) !!}         
      </div>
      </div>
 
@@ -492,24 +507,7 @@
     </div>
     </div>
 
-    <div class="form-group{{ $errors->has('salary_type') ? ' has-error' : '' }}">
-    <label class="col-md-4 control-label"> 
-    {!! Form::label('salary_type', 'Salary Type:')  !!}
-    </label>
-    <div class="col-md-4">
-    {{ Form::select('salary_type', array(
-        'Weekly' => 'Weekly', 
-        'Monthly' => 'Monthly'), 
-        null, array('class'=>'form-control' )) }}
-    
 
-    @if ($errors->has('salary_type'))
-    <span class="help-block">
-    <strong>{{ $errors->first('salary_type') }}</strong>
-    </span>
-    @endif
-    </div>
-    </div>
 
     <hr/>
         <div class="perquantity employee_type form-group{{ $errors->has('meal_allowance') ? ' has-error' : '' }}" style="display: none;">
@@ -546,7 +544,7 @@
 
                           <div class="basicpay employee_type form-group{{ $errors->has('basic_pay') ? ' has-error' : '' }}">
                         <label class="col-md-4 control-label"> 
-                        {!! Form::label('basic_pay', 'Salary:')  !!}
+                        {!! Form::label('basic_pay', 'Basic Pay:')  !!}
                         </label>
                            <div class="col-md-4">
                         {!! Form::text('basic_pay', ( isset($employee->salaries->basic_pay) ? $employee->salaries->basic_pay : null ),  ['class' => 'form-control']) !!}     
@@ -565,7 +563,7 @@
 
    <div class="row">
                     <div class="col-md-4">
-                         <a class="pull-left btnPrevious btn btn-default btn-sm" >Previous</a>
+                         <a class="pull-left btnPrevious btn btn-default" >Previous</a>
                     </div>
 
                     <div class="col-md-4 pull-right">

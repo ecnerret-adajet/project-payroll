@@ -9,6 +9,7 @@ use App\Employee;
 use App\Status;
 use App\Basic;
 use App\Quantity;
+use App\Salary;
 use App\Role;
 use Auth;
 use Carbon\Carbon;
@@ -53,7 +54,7 @@ class HomeController extends Controller
 
 
     public function logs(){
-        $employees = Employee::lists('MRQK00'+'id','id');
+        $employees = Employee::lists('id','id');
         return view('logs', compact('employees'));
     }
 
@@ -86,19 +87,19 @@ class HomeController extends Controller
 
     }
 
-     public function getdata(Request $request)
+    public function getdata(Request $request)
     {
          $this->validate($request, [
            'start_period' => 'required',
             'end_period' => 'required'
         ]); 
 
-         $attendances = Attendance::all();
+         $employees = Employee::all();
          $start_period = $request->get('start_period');
          $end_period = $request->get('end_period');
        
         
-        $employees = Employee::where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'>=',$start_period)
+        $attendances = Attendance::where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'>=',$start_period)
             ->where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'<=',$end_period)
             ->get();
         
@@ -109,6 +110,8 @@ class HomeController extends Controller
             'employees'
         ));
     }
+
+    
 
     public function showpayslips(){
         $payrolls = Payroll::all();

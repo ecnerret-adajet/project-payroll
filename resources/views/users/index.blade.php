@@ -1,27 +1,51 @@
 @extends('layouts.app')
  
 @section('content')
+
+
+<div class="row">
+
 <h1 class="page-header">Users Management
-<a href="{{ route('users.create') }}" class="btn pull-right btn-primary btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New User</a>
-<a href="{{ url('/roles')}}" class="btn pull-right btn-danger btn-sm"><i class="fa fa-life-ring" aria-hidden="true"></i> Manage Roles</a>
+
  </h1>
+
+ <ul class="breadcrumb">
+  <li><a href="{{url('home')}}">Dashboard</a></li>
+  <li><a href="{{url('users')}}">Uses</a></li>
+</ul>
 
 	@if ($message = Session::get('success'))
 		<div class="alert alert-success">
 			<p>{{ $message }}</p>
 		</div>
 	@endif
-	<table class="table table-bordered">
-		<tr>
+
+	<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Users
+
+    <a href="{{ route('users.create') }}" class="btn btn-info"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New User</a>
+<a href="{{ url('/roles')}}" class="btn btn-danger"><i class="fa fa-life-ring" aria-hidden="true"></i> Manage Roles</a>	
+    </h3>
+  </div>
+  <div class="panel-body">
+   <table id="emp-data" class="dt-responsive table-bordered nowrap display table-responsive table-hover table table-responsive">
+   <thead>
+   	<tr>
 			<th>No</th>
 			<th>Name</th>
 			<th>Email</th>
 			<th>Roles</th>
 			<th width="280px">Action</th>
 		</tr>
-	@foreach ($data as $key => $user)
+
+   </thead>
+
+   <tbody>
+   	
+@foreach ($data as $user)
 	<tr>
-		<td>{{ ++$i }}</td>
+		<td>{{ $user->id }}</td>
 		<td>{{ $user->name }}</td>
 		<td>{{ $user->email }}</td>
 		<td>
@@ -37,6 +61,17 @@
 		</td>
 	</tr>
 	@endforeach
+
+   </tbody>
+	
 	</table>
-	{!! $data->render() !!}
+  </div>
+</div>
+
+	
+
+
+</div>
+
+
 @endsection

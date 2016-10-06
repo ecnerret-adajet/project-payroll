@@ -31,6 +31,15 @@
     <link href="{{ asset('/css/buttons.bootstrap.min.css') }}" rel="stylesheet" />  
     <link href="https://raw.githubusercontent.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  
   
+         <!-- Custom CSS -->
+    <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
+      <!-- MetisMenu CSS -->
+    <link href="{{asset('css/metisMenu.min.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
   
     <style>
         body {
@@ -42,16 +51,15 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        .nav-style{
+    color: #fff ! important;
+}
     </style>
 
-    <title>MQRK Payroll</title>
+    <title>MRQK Payroll</title>
 
-   
 
-    <!-- Custom styles for this template -->
-    <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
-    <link media="print" href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -62,103 +70,174 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MQRK <small>PAYROLL</small></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" style="position: relative; padding-left: 50px;">
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        @if(Auth::check())
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img class="img-responsive" style="width: 35px; height:auto; position: absolute; top: 10px; left: 10px;" src="{{asset('img/logo.png')}}"> <span style="margin-left: 40px; color: #fff;"> MRQK Management System</span></a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">           
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" style="position: relative; padding-left: 50px;">
+                          
                   <img src="{{asset('/avatar/placeholder.png')}}" class="img-circle img-responsive " style="width: 35px; height:auto; position: absolute; top: 10px; left: 10px;" alt="User Image" />
-                  <span>{{ Auth::user()->name }}</span>
-                </a>
-                <ul class="dropdown-menu" style="width:200px; border-left: 1px solid #95a5a6; border-bottom: 1px solid #95a5a6; border-radius:0;">
-                  <!-- User image -->
-                    <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-          </ul>
-    
-        </div>
-      </div>
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-
-            <li style="background-color: #95a5a6">
-
-           
-              <img src="{{asset('/img/logo.png')}}" style="width:100px; height:auto; padding:10px; display: block; margin: auto;"  class="img-circle" alt="User Image" />
-         
+                  <span style="color: #fff;">{{ Auth::user()->name }}</span>
+                       
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="{{url('logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
 
 
 
-
-            </li>
-
-           
-            <li><a href="{{url('/home')}}"><i class="fa fa-tachometer" style="padding-right: 5px;" aria-hidden="true"></i> Dashboard</a></li>
-
-           @if(Auth::user()->hasRole('Administrator'))
-           @else
-            <li><a href="{{url('/employees/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i>My Information</a></li>
-              <li><a href="{{url('/payrolls/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslip</a></li>
-
-            <li><a href="{{url('/attendances/'.Auth::user()->employees->id)}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Time logs</a></li>
-           @endif
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
 
 
-            @permission('role-create')
-            <li><a href="{{url('/announcements')}}"><i class="fa fa-bullhorn" style="padding-right: 5px;" aria-hidden="true"></i> Announcements</a></li>
-            @endpermission
-
-            @permission('role-create')
-            <li><a href="{{url('/employees')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Employees</a></li>
-            @endpermission
-
-             @permission('role-create')
-            <li><a href="{{url('/perdays')}}"><i class="fa fa-book" style="padding-right: 5px;" aria-hidden="true"></i> Per day record </a></li>
-            @endpermission
-
-         
+                        <li class="sidebar-search">
+                         {{ Form::open(array('url' => '/search', 'method' => 'get')) }}
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search..." value="" name="q">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit" value="">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
 
 
-            @permission('role-create')
-               <li><a href="{{url('/attendances')}}"><i class="fa fa-clock-o" style="padding-right: 5px;" aria-hidden="true"></i> Time Records</a></li>
-            <li><a href="{{url('/payrolls')}}"><i class="fa fa-file-text-o" style="padding-right: 5px;" aria-hidden="true"></i> Payslips</a></li>
-            <li><a href="{{url('/users')}}"><i class="fa fa-users" style="padding-right: 5px;" aria-hidden="true"></i> Users</a></li>
-            @endpermission
-            
-          </ul>
-       
-        </div>
+                            {!! Form::close() !!} 
+                            <!-- /input-group -->
+                        </li>
 
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('home')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                        @role('User')
+                        <li>
+                            <a style="font-size: 15px;"  href="{{url('/employees/'.Auth::user()->employees->id)}}"><i class="fa fa-database" aria-hidden="true"></i> My Information </a>
+                        </li>
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('/payrolls/'.Auth::user()->employees->id)}}"><i class="fa fa-database" aria-hidden="true"></i> My Payslips </a>
+                        </li>   
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('/attendances/'.Auth::user()->employees->id)}}"><i class="fa fa-database" aria-hidden="true"></i> My Attendance </a>
+                        </li>   
+                        @endrole
+
+                        @role('Administrator')
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('employees')}}"><i class="fa fa-database" aria-hidden="true"></i> Employee </a>
+                           
+                            <!-- /.nav-second-level -->
+                        </li>  
+
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('announcements')}}"><i class="fa fa-database" aria-hidden="true"></i> Annnouncements </a>
+                           
+                            <!-- /.nav-second-level -->
+                        </li>        
+
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('perdays')}}"><i class="fa fa-database" aria-hidden="true"></i> Per-day Records </a>
+                           
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('attendances')}}"><i class="fa fa-database" aria-hidden="true"></i> Time Records </a>
+                           
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a style="font-size: 15px;" href="{{url('payrolls')}}"><i class="fa fa-database" aria-hidden="true"></i> Payslips </a>
+                           
+                            <!-- /.nav-second-level -->
+                        </li>
+                  
+                
+                       
+                        <li>
+                            <a style="font-size: 15px;" href="#"><i class="fa fa-database" aria-hidden="true"></i>  User Management<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="{{url('/users')}}"><i class="fa fa-tags" aria-hidden="true"></i> All Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/roles')}}""><i class="fa fa-tags" aria-hidden="true"></i> Manage Roles</a>
+                                </li>
+                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        @endrole
         
 
-        @yield('content')
+                      
 
-        </div><!-- end col-md-9 -->
-      
-
+              
 
 
-      </div>
+
+                
+                
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        @endif
+       
+    
+
+
+        <div id="page-wrapper">
+
+                   
+
+                        @yield('content')
+
+
+
+        </div>
+        <!-- /#page-wrapper -->
+
     </div>
+    <!-- /#wrapper -->
+  
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
+
+   <script src="{{asset('js/sb-admin-2.js')}}"/></script>
+   <!-- Metis Menu Plugin JavaScript -->
+    <script src="{{asset('js/metisMenu.min.js')}}"></script>
     <!-- select2 js plugin -->
     <script src="{{asset('js/select2.min.js')}}"></script>
      <!-- bootstsrap modal -->
@@ -306,6 +385,58 @@ $('ul.nav a').filter(function() {
         </script>
 
 
-        
+
+<script type="text/javascript">
+            var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datefield").setAttribute("max", today);
+        </script>
+
+        <script type="text/javascript">
+function dobcheck()
+{
+    var birth = document.getElementById('bday')
+    if(birth != "")
+    {
+
+        var record=document.getElementById('bday').value.trim();
+        var currentdate=new Date();    
+        var day1 = currentdate3.getDate();   
+        var month1 = currentdate3.getMonth();
+        month1++;     
+        var year11 = currentdate3.getFullYear()-17;
+        var year2= currentdate3.getFullYear()-100;   
+        var record_day1=record.split("/");
+        var sum=record_day1[1]+'/'+record_day1[0]+'/'+record_day1[2];  
+        var current= month1+'/'+day1+'/'+year11;
+        var current1= month1+'/'+day1+'/'+year2;
+        var d1=new Date(current)
+        var d2=new Date(current1)
+        var record1 = new Date(sum);      
+        if(record1 > d1)
+        {
+
+            alert("Sorry ! Minors need parential guidance to use this website");
+            document.getElementById('bday').blur();
+            document.getElementById('bday').value="";
+            document.getElementById('bday').focus();
+            return false;
+        }
+    } 
+}
+</script>
+
+   @include('flashy::message')
+
   </body>
 </html>

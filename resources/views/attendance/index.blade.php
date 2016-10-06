@@ -2,7 +2,9 @@
 
 @section('content')
 
-<ul class="breadcrumb" style="margin-top: 50px;">
+<div class="row">
+<h1 class="page-header">Attendance</h1>
+<ul class="breadcrumb">
   <li><a href="#">Dashboard</a></li>
   <li><a href="#">Attendance</a></li>
 </ul>
@@ -17,16 +19,20 @@
  <table id="emp-data" class="dt-responsive table-bordered nowrap display table-responsive table-hover table table-responsive">
               <thead>
                 <tr>
-                  <th></th>
+                  <th>Employee ID</th>
                   <th>Employee Name</th>
-                  <th>Time</th>
+                  <th>Date</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
                 </tr>
               </thead>
               <tfoot>
-               <tr>
-                  <th></th>
+                   <tr>
+                  <th>Employee ID</th>
                   <th>Employee Name</th>
-                  <th>Time</th>
+                  <th>Date</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -34,11 +40,16 @@
 
 
                 <tr>
+
+
                   <td>
-                 @foreach($attendance->employees as $employee)
-<img class="img-responsive img-circle" style="width: 35px; height: auto;" src="{{asset('/avatar/'.$employee->avatar)}}">
-                 @endforeach
+                    @foreach($attendance->employees as $employee)
+                  {{$employee->id}}
+                  @endforeach
                   </td>
+
+
+
                   <td>
 
 
@@ -49,15 +60,33 @@
                   </td>
 
                   <td>
+                     
+                        {{   $attendance->created_at->format('Y-m-d')   }} 
+                
+
+                  </td>
+
+                  <td>
                     @if(str_contains($attendance->time_out->format('Y-m-d h:i:s A'),' 12:00:00 AM'))
+                    NO TIME IN
                        @else
-                        <a href="" class="btn btn-primary btn-sm">TIME IN</a>      {{   $attendance->time_out->format('Y-m-d h:i:s A')   }} 
+                        <a href="" class="btn btn-primary btn-sm">TIME IN</a>      {{   $attendance->time_out->format(' h:i:s A')   }} 
                     @endif
 
 
-                     @if(str_contains($attendance->time_in->format('Y-m-d h:i:s A'),' 12:00:00 AM'))
+                 
+        
+                  </td>
+
+
+
+                  <td>
+                 
+
+                     @if(str_contains($attendance->time_in->format(' h:i:s A'),' 12:00:00 AM'))
+                     NO TIME OUT
                        @else
-                         <a href="" class="btn btn-danger btn-sm">TIME OUT</a>       {{  $attendance->time_in->format('Y-m-d h:i:s A')  }} 
+                         <a href="" class="btn btn-danger btn-sm">TIME OUT</a>  {{  $attendance->time_in->format('h:i:s A')  }} 
                     @endif
         
                   </td>
@@ -74,6 +103,8 @@
 
 
   </div>
+</div>
+
 </div>
 
 

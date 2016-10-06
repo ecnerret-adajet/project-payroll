@@ -2,9 +2,13 @@
 
 @section('content')
 
-<ul class="breadcrumb" style="margin-top: 50px;">
-  <li><a href="#">Dashboard</a></li>
-  <li><a href="#">Payslip</a></li>
+<div class="row">
+
+<h1 class="page-header">Payslips</h1>
+
+<ul class="breadcrumb">
+  <li><a href="{{url('home')}}">Dashboard</a></li>
+  <li><a href="{{url('payslips')}}">Payslip</a></li>
 </ul>
 
 <div class="panel panel-primary">
@@ -92,6 +96,7 @@
   </div>
 </div>
 
+</div>
 
 
 @endsection

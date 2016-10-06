@@ -26,6 +26,16 @@
                          </div>
                          </div>
 
+<hr/>
+                        <div class="form-group">
+                         <label class="col-md-4 control-label"> 
+                         {!! Form::label('payroll_date', 'Payroll Date:')  !!}
+                        </label>
+                        <div class="col-md-5">
+                            {!! Form::input('date', 'payroll_date', $payroll->payroll_date, ['class' => 'form-control']) !!}         
+                         </div>
+                         </div>
+
 
                    
 

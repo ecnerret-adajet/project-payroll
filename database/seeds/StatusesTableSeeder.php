@@ -12,7 +12,7 @@ class StatusesTableSeeder extends Seeder
     public function run()
     {
          DB::table('statuses')->insert([
-          array('name'=>'Probationary' ),
+          array('name'=>'Contractual' ),
           array('name'=>'Regular' )
         ]);
     }

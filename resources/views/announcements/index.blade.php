@@ -2,15 +2,28 @@
 
 @section('content')
 
+<div class="row">
+
  <h1 class="page-header">All Announcements
-<a href="{{url('/announcements/create')}}" class="btn pull-right btn-primary btn-sm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Announcement</a>
+
  </h1>
+  <ul class="breadcrumb">
+  <li><a href="{{url('home')}}">Dashboard</a></li>
+  <li class="active"><a href="{{url('announcements')}}">All announcements</a></li>
+</ul>
 
+ <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Announcements
 
-
- <table id="table-data" class=" dt-responsive nowrap display table-responsive table-hover table table-responsive">
+    <a href="{{url('/announcements/create')}}" class="btn btn-info"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Announcement</a>
+    </h3>
+  </div>
+  <div class="panel-body">
+   
+ <table id="table-data" class="table-bordered dt-responsive nowrap display table-responsive table-hover table table-responsive" width="100%">
               <thead>
-                <tr class="info">
+                <tr >
                   <th>Title</th>
                   <th>Body</th>
                   <th>Publish Date</th>
@@ -18,7 +31,7 @@
                 </tr>
               </thead>
               <tfoot>
-                <tr class="info">
+                <tr >
                <th>Title</th>
                   <th>Body</th>
                   <th>Publish Date</th>
@@ -29,7 +42,7 @@
               @foreach($announcements as $announcement)
                 <tr>
                   <td>
-                 	{{$announcement->title}}
+                  {{$announcement->title}}
                   </td>
                   <td>
                   {{$announcement->body}}   
@@ -50,9 +63,17 @@
               @endforeach
               </tbody>
             </table>
+  </div>
+</div>
 
 
 
 
+
+
+
+
+
+</div>
 
 @endsection

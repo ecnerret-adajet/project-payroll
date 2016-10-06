@@ -3,8 +3,6 @@
 
 
 
- 
-
 
         <div class="panel panel-primary col-md-offset-4 col-md-4"  style="margin-top: 100px; padding: 0 ! important;">
   <div class="panel-heading">
@@ -51,7 +49,7 @@
         <div class="form-group{{ $errors->has('employee_list') ? ' has-error' : '' }}">
  
     <div class="col-md-12">
-    {!! Form::select('employee_list', $employees, null, ['class' => 'form-control select2', 'placeholder' => '-- Select Time in --']) !!}
+    {!! Form::select('employee_list', $employees, null, ['class' => 'form-control select2', 'placeholder' => '-- Select Employee Id--']) !!}
 
     @if ($errors->has('employee_list'))
     <span class="help-block">
@@ -60,6 +58,12 @@
     @endif
     </div>
     </div>
+
+
+
+
+<div style="display: none;">
+
 
     <div class="perquantity employee_type  form-group{{ $errors->has('time_in') ? ' has-error' : '' }}">
     <label class="col-md-4 control-label"> 
@@ -70,7 +74,7 @@
 
  <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                     {!! Form::input('date', 'time_in',  $attendance->time_in, ['class' => 'form-control', 'id' => 'datetimepicker1']) !!}  
+                     {!! Form::input('date', 'time_in',  date('Y-m-d'), ['class' => 'form-control', 'id' => 'datetimepicker1']) !!}  
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -91,7 +95,7 @@
     {!! Form::label('time_out', 'Time Out:')  !!}
     </label>
     <div class="col-md-8">
-   {!! Form::input('date', 'time_out', $attendance->time_in, ['class' => 'form-control']) !!}  
+   {!! Form::input('date', 'time_out', date('Y-m-d'), ['class' => 'form-control']) !!}  
 
     @if ($errors->has('time_out'))
     <span class="help-block">
@@ -101,6 +105,8 @@
     </div>
     </div>
 
+
+</div><!-- end -->
 
 
                  <div class="row">

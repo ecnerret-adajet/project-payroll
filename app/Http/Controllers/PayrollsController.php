@@ -73,17 +73,65 @@ class PayrollsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Payroll $payroll, Attendance $attendance)
+    public function show(Payroll $payroll)
     {
         $sum = 0;
+        $total_hour = 0;
+        $total_minutes = 0;
+        $hourly_rate = 0;
+        $total_perday = 0;
         $gross = 0;
         $total = 0;
         $ssspay = 0;
         $pagpay = 0;
         $allowance = 0;
+        $attendance1 = 0;
 
+
+      
+
+        $attendances = Attendance::where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'>=',$payroll->start_period)
+            ->where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'<=',$payroll->end_period)
+            ->get();
+
+
+        foreach($attendances as $attendance)
+        {
+            $total_hour += $attendance->time_in->diffInHours( $attendance->time_out);
+        }
+
+        foreach($attendances as $attendance)
+        {
+            $total_minutes += $attendance->time_in->diffInMinutes( $attendance->time_out);
+        }
+
+        $employees = Employee::all();
+        foreach($payroll->employees as $employee)
+        {
+            $employee->salaries->basic_pay;
+        }
+
+
+
+        $hourly_rate = $employee->salaries->basic_pay / 8;
+
+
+        $perdays = Perday::where(DB::raw('DATE_FORMAT(publish_date,"%Y-%m-%d")'),'>=',$payroll->start_period)
+            ->where(DB::raw('DATE_FORMAT(publish_date,"%Y-%m-%d")'),'<=',$payroll->end_period)
+            ->get();
+
+        foreach($perdays as $perday){
+            $total_perday += $perday->total_quantity;
+        }
+
+      
 
         return view('payrolls.show',compact(
+            'per_quantity',
+            'total_hour',
+            'total_perday',
+            'hourly_rate',
+            'total_minutes',
             'employees',
             'attendances',
             'attendance',
