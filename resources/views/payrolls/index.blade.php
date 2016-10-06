@@ -25,9 +25,7 @@
                   <th>Payroll Number</th>
                   <th>Name</th>
                   <th>Position</th>
-                  <th>Attendance</th>
                   <th>Basic Pay</th>
-                  <th>Per Quantity</th>
                   <th>Date Period</th>
                   <th>Action</th>
                 </tr>
@@ -59,28 +57,16 @@
                     
                   @endforeach
                   </td>
-                  <td>
-                  <span style="display: none ! important"> 
-                  @foreach($payroll->employees as $employee)
-                        @foreach($employee->attendances as $attendance)
-                          {{$attendance->time_in}}
-                          {{$attendance->id}}
-                        @endforeach
-                  @endforeach
-                  </span>
-
-
-                       {{  $payroll->start_period->diffInDays($payroll->end_period).' Day(s)' }}
-
-                   
-                  </td>
+                 
                   <td>
                     @foreach($payroll->employees as $employee)
                         {{ ($employee->salaries->basic_pay == null ? 'Per day basis' : $employee->salaries->basic_pay )}}
                     @endforeach
                   </td>
-                  <td>Per Quantity</td>
-                  <td>Date Period</td>
+                  <td>
+                      {{  date('m/d/Y', strtotime($payroll->payroll_date)) == '01/01/1970' ? 'N/A' : date('m/d/Y', strtotime($payroll->payroll_date))  }} 
+
+                  </td>
                   <td>
                        <a class="btn btn-primary" href="{{url('payrolls/'.$payroll->id)}}">
                   <i class="fa fa-eye " aria-hidden="true"></i>  Details

@@ -31,8 +31,9 @@ class PayrollsController extends Controller
     {
         $payrolls = Payroll::all();
         $employees = Employee::all();
-        $attendances = Attendance::where('time_in', '=', 'time_out')->count();
-        return view('payrolls.index', compact('payrolls','employees','attendances'));
+    
+
+        return view('payrolls.index', compact('payrolls','employees','attendances','payroll'));
     }
 
     /**
@@ -86,9 +87,6 @@ class PayrollsController extends Controller
         $pagpay = 0;
         $allowance = 0;
         $attendance1 = 0;
-
-
-      
 
         $attendances = Attendance::where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'>=',$payroll->start_period)
             ->where(DB::raw('DATE_FORMAT(created_at,"%Y-%m-%d")'),'<=',$payroll->end_period)
